@@ -2,6 +2,10 @@
 
 <p align="center">This app is my playground where I experiment and explore the wonders of React.js</p>
 
+<p>The app is deployed in github pages:</p>
+
+<img src="check-this-out.png">
+https://briedyte.github.io/my-playground/
 ---
 
 ## Installation
