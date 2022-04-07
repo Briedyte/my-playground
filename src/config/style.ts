@@ -1,20 +1,24 @@
 export const ColorPalette = {
   background: "linear-gradient(rgba(255, 233, 172, 0.267), #ffe6a36c)",
   darkerBackground: "#fbf3de",
-  text: "#282828",
-  primary: "#00b092",
-  secondary: "#d39a90",
-  tertuary: "#D7BB03",
+  primary: "#79bc95",
+  primaryLighter: "#8acea6",
+  primaryDarker: "#64a780",
+  secondary: "#ff9242",
+  tertuary: "#faaa25",
+  balloonGameBackground: "#e8faff",
+  black: "#282828",
 } as const;
 
 export const zIndex = {
   negative: -1,
   positive: 1,
+  button: 2,
 } as const;
 
 export const baseFontSize = "16px";
 
-export const fontSize = {
+export const FontSize = {
   12: "0.75rem",
   13: "0.8125rem",
   14: "0.875rem",
@@ -33,7 +37,7 @@ export const fontSize = {
   80: "5rem",
 } as const;
 
-export const spacing = {
+export const Spacing = {
   0: "0px",
   2: "2px",
   4: "4px",
@@ -64,13 +68,13 @@ export const spacing = {
   200: "200px",
 };
 
-export const fontWeight = {
+export const FontWeight = {
   regular: 400,
   medium: 500,
   bold: 700,
 } as const;
 
-export const borderRadius = {
+export const BorderRadius = {
   4: "4px",
   5: "5px",
   8: "8px",
@@ -83,9 +87,9 @@ export const borderRadius = {
   circle: "50%",
 } as const;
 
-export const fontFamily = {
-  nunito: '"Nunito", sans-serif',
-  teko: '"Teko", sans-serif',
+export const FontFamily = {
+  nunito: "'Nunito', sans-serif",
+  teko: "'Teko', sans-serif",
 } as const;
 
 export const Breakpoint = {

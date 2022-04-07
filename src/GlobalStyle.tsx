@@ -1,5 +1,10 @@
 import { createGlobalStyle } from "styled-components";
-import { baseFontSize, ColorPalette } from "./config/style";
+import {
+  baseFontSize,
+  ColorPalette,
+  FontFamily,
+  FontWeight,
+} from "./config/style";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -10,8 +15,16 @@ const GlobalStyle = createGlobalStyle`
 html, body, #root {
     height: 100%;
     font-size: ${baseFontSize};
-    color: ${ColorPalette.text};
-},
+}
+p {
+    color: ${ColorPalette.black};
+    font-family: ${FontFamily.nunito};
+    font-weight: ${FontWeight.regular};
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: ${FontFamily.teko};
+    font-weight: ${FontWeight.regular};
+}
 `;
 
 export default GlobalStyle;
