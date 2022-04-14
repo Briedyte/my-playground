@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ColorPalette, FontSize, Spacing, zIndex } from "../../config/style";
 import { ReactComponent as InputBordersImg } from "../../images/input.svg";
 
@@ -7,11 +7,6 @@ export enum InputType {
   text = "text",
   number = "number",
   password = "password",
-}
-
-interface FormInputProps {
-  inputType?: InputType;
-  label: string;
 }
 
 const MainContainer = styled.div`
@@ -33,14 +28,20 @@ const Label = styled.label`
   transition: background 0.2s ease-in, margin-left 0.6s ease-in,
     top 0.8s ease-in;
 
-  ${({ isFocused }: { isFocused: boolean }) =>
-    isFocused &&
-    `
-    top: 6px;
-    margin-left:  ${Spacing[50]};
-    background: ${ColorPalette.primary};
-
-      `};
+  ${({ $isFocused, $hasError }: { $isFocused: boolean; $hasError: boolean }) =>
+    css`
+      ${$isFocused &&
+      `
+        top: 6px;
+        margin-left:  ${Spacing[50]};
+        background: ${ColorPalette.primary};
+      `}
+      ${$hasError &&
+      ` top: 6px;
+        margin-left:  ${Spacing[50]};
+        background: ${ColorPalette.error};
+      `}
+    `};
 `;
 
 const InputContainer = styled.div`
@@ -60,8 +61,26 @@ const InputBorders = styled(InputBordersImg)`
 
   path {
     transition: stroke 0.2s ease-in;
-    stroke: ${({ isFocused }: { isFocused: boolean }) =>
-      isFocused ? ColorPalette.primary : ColorPalette.black};
+    stroke: ${ColorPalette.black};
+
+    ${({
+      $hasError,
+      $isFocused,
+    }: {
+      $hasError: boolean;
+      $isFocused: boolean;
+    }) =>
+      css`
+        ${$hasError &&
+        `
+          stroke: ${ColorPalette.error};
+        `}
+
+        ${$isFocused &&
+        `
+          stroke: ${ColorPalette.primary};
+        `}
+      `}
   }
 `;
 
@@ -77,20 +96,57 @@ const Input = styled.input`
   }
 `;
 
-const FormInput = ({ inputType = InputType.text, label }: FormInputProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+const ErrorMessage = styled.span`
+  color: ${ColorPalette.error};
+  text-align: right;
+`;
+
+interface FormInputProps {
+  inputType?: InputType;
+  label: string;
+  name: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errorMessage?: string | null;
+  required?: boolean;
+}
+
+const FormInput = ({
+  inputType = InputType.text,
+  label,
+  name,
+  onChange,
+  required = false,
+  errorMessage = null,
+}: FormInputProps) => {
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
     <MainContainer>
-      <Label isFocused={isFocused}>{label}</Label>
+      <Label
+        $isFocused={isInputFocused}
+        $hasError={!!errorMessage && !isInputFocused}
+      >
+        {label}
+      </Label>
       <InputContainer>
-        <InputBorders isFocused={isFocused} />
+        <InputBorders
+          $hasError={!!errorMessage && !isInputFocused}
+          $isFocused={isInputFocused}
+        />
         <Input
+          name={name}
           type={inputType}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={(e) => {
+            setIsInputFocused(false);
+          }}
+          onChange={(e) => onChange(e)}
+          required={required}
         />
       </InputContainer>
+      {errorMessage && !isInputFocused && (
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+      )}
     </MainContainer>
   );
 };

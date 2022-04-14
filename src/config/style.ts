@@ -8,6 +8,7 @@ export const ColorPalette = {
   tertuary: "#faaa25",
   balloonGameBackground: "#e8faff",
   black: "#282828",
+  error: "#ef4a13",
 } as const;
 
 export const zIndex = {

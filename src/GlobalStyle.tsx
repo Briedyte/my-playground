@@ -16,7 +16,7 @@ html, body, #root {
     height: 100%;
     font-size: ${baseFontSize};
 }
-p, label, input {
+p, label, input, span {
     color: ${ColorPalette.black};
     font-family: ${FontFamily.nunito};
     font-weight: ${FontWeight.regular};

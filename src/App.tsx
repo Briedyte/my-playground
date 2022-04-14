@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
+import { ColorPalette } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
 import Homepage from "./pages/Homepage";
 
@@ -19,7 +20,7 @@ const NavAndMain = styled.div`
 const Main = styled.main`
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(255, 233, 172, 0.267), #ffe6a36c);
+  background: ${ColorPalette.background};
 `;
 
 function App() {

@@ -8,12 +8,8 @@ import {
   zIndex,
 } from "../../config/style";
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick: () => void;
-}
-
 const ButtonWrapper = styled.div`
+  position: relative;
   z-index: ${zIndex.positive};
 `;
 
@@ -61,10 +57,18 @@ const ButtonStyled = styled.button`
   }
 `;
 
-const Button = ({ children, onClick }: ButtonProps) => {
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  type: "submit" | "button";
+}
+
+const Button = ({ children, onClick, type = "button" }: ButtonProps) => {
   return (
     <ButtonWrapper>
-      <ButtonStyled onClick={onClick}>{children}</ButtonStyled>
+      <ButtonStyled onClick={onClick} type={type}>
+        {children}
+      </ButtonStyled>
     </ButtonWrapper>
   );
 };
