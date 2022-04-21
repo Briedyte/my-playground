@@ -5,6 +5,7 @@ export const ColorPalette = {
   primaryLighter: "#8acea6",
   primaryDarker: "#64a780",
   secondary: "#ff9242",
+  secondaryDarker: "#e17d35",
   tertuary: "#faaa25",
   balloonGameBackground: "#e8faff",
   black: "#282828",

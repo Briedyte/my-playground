@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
+import Sidenav from "./components/Sidenav";
 import { ColorPalette } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
 import Homepage from "./pages/Homepage";
@@ -10,6 +11,7 @@ const AppWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: ${ColorPalette.background};
 `;
 
 const NavAndMain = styled.div`
@@ -20,7 +22,6 @@ const NavAndMain = styled.div`
 const Main = styled.main`
   width: 100%;
   height: 100%;
-  background: ${ColorPalette.background};
 `;
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       <AppWrapper>
         <Header />
         <NavAndMain>
-          <nav>The navigation will go here</nav>
+          <Sidenav/>
           <Main>
             <Homepage />
           </Main>
