@@ -17,6 +17,7 @@ const Title = styled.h3`
 `;
 
 const Link = styled.li`
+  color: ${ColorPalette.lightText};
   padding: ${Spacing[6]};
   padding-left: ${Spacing[12]};
   border: 2px solid ${ColorPalette.black};

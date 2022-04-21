@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Container from "../components/Container";
-import Slide from "../images/slide.svg";
+import Slide from "../images/slide.png";
 import BalloonGame from "../components/BalloonGame";
 import {
   ColorPalette,

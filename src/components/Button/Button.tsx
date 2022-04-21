@@ -14,8 +14,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const ButtonStyled = styled.button`
-  background: ${ColorPalette.primary};
-  color: ${ColorPalette.black};
+  background: ${ColorPalette.secondary};
+  color: ${ColorPalette.lightText};
   font: ${FontFamily.nunito};
   padding: ${Spacing[12]} ${Spacing[32]};
   font-size: ${FontSize[18]};
@@ -29,7 +29,7 @@ const ButtonStyled = styled.button`
   :after {
     content: "";
     border: 2px solid ${ColorPalette.black};
-    background: ${ColorPalette.primaryDarker};
+    background: ${ColorPalette.secondaryDarker};
     border-radius: 20px;
     display: block;
     position: absolute;
@@ -42,11 +42,10 @@ const ButtonStyled = styled.button`
   }
 
   :hover {
-    background: ${ColorPalette.primaryLighter};
+    background: ${ColorPalette.secondaryLighter};
   }
 
   :active {
-    background: ${ColorPalette.primary};
     top: 5px;
 
     :after {
