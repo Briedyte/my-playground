@@ -61,8 +61,8 @@ const IdleBalloonImg = styled.img`
     `${isGameOpen ? "upAndGone 2.5s ease-in forwards" : "none"}`};
 `;
 
-const GameContainer = styled.section`
-  @keyframes toWhite {
+const ActiveGameContainer = styled.section`
+  @keyframes backgroundAppear {
     0% {
       background: none;
     }
@@ -78,7 +78,8 @@ const GameContainer = styled.section`
   bottom: 0;
   left: 0;
   right: 0;
-  animation: toWhite 1s ease-in forwards;
+  z-index: ${zIndex.positive};
+  animation: backgroundAppear 1s ease-in forwards;
 `;
 
 const CloseButton = styled.button`
@@ -127,7 +128,7 @@ const Cloud = styled.img`
   pointer-events: fill;
 
   ${MediaQuery.s} {
-    height: ${70 / countOfClouds}%;
+    height: ${85 / countOfClouds}%;
   }
 
   ::selection {
@@ -168,7 +169,7 @@ const GameBalloonWrapper = styled.div`
     positionY: string;
     gameReady: boolean;
   }) => `
-    transition: transform ${gameReady ? 0 : 14}s linear;
+    transition: transform ${gameReady ? 0 : 16}s linear;
     transform: translateX(${positionX}) translateY(${positionY});
   `}
 `;
@@ -276,10 +277,9 @@ const BalloonGame = () => {
 
   const getRandomOffscreenPosition = (screenWidthOrHeight: number) => {
     return Math.random() > 0.5
-      ? `${Math.random() * 1000 + screenWidthOrHeight}px`
-      : `${-(Math.random() * 1000) - screenWidthOrHeight}px`;
+      ? `${Math.random() * 2000 + screenWidthOrHeight}px`
+      : `${-(Math.random() * 2000) - screenWidthOrHeight}px`;
   };
-
 
   return (
     <div>
@@ -292,7 +292,7 @@ const BalloonGame = () => {
         isGameOpen={gameStage !== GameStages.idle}
       />
       {gameStage !== GameStages.idle && (
-        <GameContainer>
+        <ActiveGameContainer>
           <CloseButton
             onClick={() => {
               setGameStage(GameStages.idle);
@@ -358,7 +358,7 @@ const BalloonGame = () => {
               onGameEnd={(time) => setScoredTime(time)}
             />
           </TimerWrapper>
-        </GameContainer>
+        </ActiveGameContainer>
       )}
     </div>
   );
