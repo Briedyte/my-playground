@@ -30,16 +30,16 @@ const Label = styled.label`
 
   ${({ $isFocused, $hasError }: { $isFocused: boolean; $hasError: boolean }) =>
     css`
+      ${$hasError &&
+      ` top: 6px;
+        margin-left:  ${Spacing[50]};
+        background: ${ColorPalette.error};
+      `}
       ${$isFocused &&
       `
         top: 6px;
         margin-left:  ${Spacing[50]};
         background: ${ColorPalette.primary};
-      `}
-      ${$hasError &&
-      ` top: 6px;
-        margin-left:  ${Spacing[50]};
-        background: ${ColorPalette.error};
       `}
     `};
 `;
@@ -75,7 +75,6 @@ const InputBorders = styled(InputBordersImg)`
         `
           stroke: ${ColorPalette.error};
         `}
-
         ${$isFocused &&
         `
           stroke: ${ColorPalette.primary};
@@ -99,6 +98,9 @@ const Input = styled.input`
 const ErrorMessage = styled.span`
   color: ${ColorPalette.error};
   text-align: right;
+  width: 60%;
+  margin-right: 0;
+  margin-left: auto;
 `;
 
 interface FormInputProps {
@@ -106,8 +108,9 @@ interface FormInputProps {
   label: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage?: string | null;
+  errorMessage?: string;
   required?: boolean;
+  onBlur?: (inputValue: string) => void;
 }
 
 const FormInput = ({
@@ -116,37 +119,39 @@ const FormInput = ({
   name,
   onChange,
   required = false,
-  errorMessage = null,
+  errorMessage = "",
+  onBlur,
 }: FormInputProps) => {
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [inputFocused, setInputFocused] = useState(false);
+  const [requiredErrorShown, setRequiredErrorShown] = useState(false);
+
+  const hasError = !!errorMessage || requiredErrorShown;
 
   return (
     <MainContainer>
-      <Label
-        $isFocused={isInputFocused}
-        $hasError={!!errorMessage && !isInputFocused}
-      >
+      <Label $isFocused={inputFocused} $hasError={hasError}>
         {label}
       </Label>
       <InputContainer>
-        <InputBorders
-          $hasError={!!errorMessage && !isInputFocused}
-          $isFocused={isInputFocused}
-        />
+        <InputBorders $isFocused={inputFocused} $hasError={hasError} />
         <Input
           name={name}
           type={inputType}
-          onFocus={() => setIsInputFocused(true)}
+          onFocus={() => setInputFocused(true)}
           onBlur={(e) => {
-            setIsInputFocused(false);
+            setInputFocused(false);
+            onBlur && onBlur(e.currentTarget.value);
+            setRequiredErrorShown(
+              e.currentTarget.value || !ErrorMessage ? false : true
+            );
           }}
           onChange={(e) => onChange(e)}
           required={required}
+          onInvalid={() => setRequiredErrorShown(true)}
         />
       </InputContainer>
-      {errorMessage && !isInputFocused && (
-        <ErrorMessage>{errorMessage}</ErrorMessage>
-      )}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {requiredErrorShown && <ErrorMessage>Required</ErrorMessage>}
     </MainContainer>
   );
 };
