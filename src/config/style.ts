@@ -1,6 +1,6 @@
 export const ColorPalette = {
-  background: "linear-gradient(rgba(255, 233, 172, 0.267), #ffe6a36c)",
-  darkerBackground: "#fbf3de",
+  gradientBackground: "linear-gradient(rgba(255, 233, 172, 0.267), #ffe6a36c)",
+  darkerBackground: "#fbf3ded1",
   lightText: "#fff8e6",
   primary: "#048181",
   primaryLighter: "#28a0a0",

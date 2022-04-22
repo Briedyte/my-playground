@@ -28,6 +28,7 @@ const LeftItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${Spacing[50]};
+  margin: 0 auto;
 `;
 
 const MainTitle = styled.h1`
@@ -42,11 +43,15 @@ const SmallerTitle = styled.h2`
 
 const SliderImg = styled.img`
   text-align: right;
-  max-height: 500px;
+  max-width: 300px;
+  align-self: end;
+  margin-bottom: ${Spacing[100]};
   ${MediaQuery.m} {
     position: absolute;
+    margin: 0 auto;
     opacity: 0.1;
-    width: 100%;
+    max-width: 100%;
+    align-self: center;
     z-index: ${zIndex.negative};
   }
 `;
