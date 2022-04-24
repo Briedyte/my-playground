@@ -23,7 +23,7 @@ const Label = styled.label`
   margin-left: ${Spacing[11]};
   padding: ${Spacing[2]} ${Spacing[8]} ${Spacing[12]};
   background: ${ColorPalette.black};
-  color: ${ColorPalette.darkerBackground};
+  color: ${ColorPalette.backgroundSolidLighter};
   border-radius: 15px 15px 0 0;
   transition: background 0.2s ease-in, margin-left 0.6s ease-in,
     top 0.8s ease-in;
@@ -56,7 +56,7 @@ const InputBorders = styled(InputBordersImg)`
   top: 0;
   width: 100%;
   height: 100%;
-  fill: ${ColorPalette.darkerBackground};
+  fill: ${ColorPalette.backgroundSolidLighter};
   z-index: ${zIndex.negative};
 
   path {

@@ -29,12 +29,12 @@ interface FormValues {
 }
 
 const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: ${Spacing[11]};
 `;
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [user, setUser] = useState<FormValues>({
     [FormFields.firstName]: "",
     [FormFields.lastName]: "",
@@ -43,32 +43,39 @@ const RegistrationForm = () => {
     [FormFields.confirmPassword]: "",
     [FormFields.userName]: "",
   });
-
   const [inputErrors, setInputErrors] = useState({
     [FormFields.email]: "",
     [FormFields.password]: "",
     [FormFields.confirmPassword]: "",
     [FormFields.userName]: "",
   });
+  const [isFormLoading, setIsFormLoading] = useState(false);
 
   const isFormValid = () =>
     Object.values(user).every((item) => item) &&
     Object.values(inputErrors).every((error) => !error);
 
   const registerUser = async () => {
-    if (isFormValid()) {
-      try {
-        const response = await fetch("http://localhost:8000/register", {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-            "content-type": "application/json",
-          },
-        });
-        console.log(response.json());
-      } catch (err) {
-        console.log(err);
-      }
+    if (!isFormValid()) {
+      return;
+    }
+
+    setIsFormLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:8000/register", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      setIsFormLoading(false);
+      onSuccess();
+      console.log(response);
+    } catch (err) {
+      setIsFormLoading(false);
+      console.log(err);
     }
   };
 
@@ -167,7 +174,9 @@ const RegistrationForm = () => {
         }
         required
       />
-      <Button type="submit">Sign up</Button>
+      <Button type="submit" disabled={isFormLoading}>
+        {isFormLoading ? "Loading..." : "Sign in"}
+      </Button>
     </Form>
   );
 };

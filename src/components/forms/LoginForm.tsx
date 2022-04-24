@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Spacing } from "../../config/style";
 import Button from "../Button";
 import FormInput from "../Form/FormInput";
 
@@ -9,7 +8,6 @@ const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: ${Spacing[11]};
 `;
 
 enum FormFields {
@@ -78,7 +76,9 @@ const LoginForm = () => {
         }
         required
       />
-      <Button type="submit">{isFormLoading ? "Loading..." : "Sign in"}</Button>
+      <Button type="submit" disabled={isFormLoading}>
+        {isFormLoading ? "Loading..." : "Sign in"}
+      </Button>
     </Form>
   );
 };
