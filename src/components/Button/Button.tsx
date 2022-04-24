@@ -54,18 +54,28 @@ const ButtonStyled = styled.button`
       right: 0;
     }
   }
+
+  :disabled {
+    background: ${ColorPalette.secondaryDarker};
+  }
 `;
 
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "submit" | "button";
+  disabled?: boolean;
 }
 
-const Button = ({ children, onClick, type = "button" }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  type = "button",
+  disabled = false,
+}: ButtonProps) => {
   return (
     <ButtonWrapper>
-      <ButtonStyled onClick={onClick} type={type}>
+      <ButtonStyled onClick={onClick} type={type} disabled={disabled}>
         {children}
       </ButtonStyled>
     </ButtonWrapper>
