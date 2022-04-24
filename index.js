@@ -28,4 +28,23 @@ app.post("/register", async (req, res) => {
   res.json(response);
 });
 
+app.post("/login", async (req, res) => {
+  const response = await fetch(
+    "https://fake-authentication1.p.rapidapi.com/api/v1/authentication/login",
+    {
+      method: "POST",
+      body: JSON.stringify(req.body),
+      headers: {
+        "content-type": "application/json",
+        "X-RapidAPI-Host": "fake-authentication1.p.rapidapi.com",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_X_RAPIDAPI_API_KEY}`,
+      },
+    }
+  )
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+
+  res.json(response);
+});
+
 app.listen(8000, () => console.log("Server is running on port " + PORT));
