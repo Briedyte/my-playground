@@ -1,6 +1,7 @@
 export const ColorPalette = {
-  gradientBackground: "linear-gradient(rgba(255, 233, 172, 0.267), #ffe6a36c)",
-  darkerBackground: "#fbf3ded1",
+  backgroundTransparent: "#fbf3ded1",
+  backgroundSolidDarker: "#f6e9c6",
+  backgroundSolidLighter: "#fff8e5",
   lightText: "#fff8e6",
   primary: "#048181",
   primaryLighter: "#28a0a0",
@@ -111,3 +112,5 @@ export const MediaQuery = {
   l: `@media(max-width: ${Breakpoint.l - 1}px)`,
   xl: `@media(min-width: ${Breakpoint.l}px)`,
 };
+
+export const headerHeight = 13;
