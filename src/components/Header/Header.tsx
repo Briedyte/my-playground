@@ -3,11 +3,18 @@ import styled from "styled-components";
 import { ReactComponent as HomeIcon } from "../../images/house.svg";
 import { ReactComponent as HeaderBackground } from "../../images/header.svg";
 import Container from "../Container";
-import { ColorPalette, Spacing, zIndex } from "../../config/style";
+import {
+  ColorPalette,
+  headerHeight,
+  Spacing,
+  zIndex,
+} from "../../config/style";
+import { Link } from "react-router-dom";
 
 const HeaderWrapper = styled.header`
   position: relative;
   width: 100%;
+  height: ${headerHeight}%;
   z-index: ${zIndex.positive};
   padding-bottom: ${Spacing[11]};
 `;

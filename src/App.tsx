@@ -7,29 +7,22 @@ import Sidenav from "./components/Sidenav";
 
 import Homepage from "./pages/Homepage";
 
-import { ColorPalette, MediaQuery, Spacing } from "./config/style";
+import { MediaQuery, Spacing } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
 import Authentication from "./pages/Authentication";
 import NotFound from "./pages/NotFound";
 import CommingSoon from "./pages/CommingSoon";
-
-const AppWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: ${ColorPalette.gradientBackground};
-`;
+import { headerHeight } from "./config/style";
 
 const NavAndMain = styled.div`
-  height: 100%;
+  height: ${100 - headerHeight}%;
   display: flex;
 `;
 
 const Main = styled.main`
   padding-top: ${Spacing[16]};
   width: 100%;
-  height: 100%;
+  min-height: inherit;
   ${MediaQuery.xs} {
     padding-left: 50px;
   }
@@ -38,20 +31,18 @@ const Main = styled.main`
 function App() {
   return (
     <BrowserRouter>
-      <AppWrapper>
-        <Header />
-        <NavAndMain>
-          <Sidenav />
-          <Main>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/authentication" element={<Authentication />} />
-              <Route path="/comming-soon" element={<CommingSoon />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Main>
-        </NavAndMain>
-      </AppWrapper>
+      <Header />
+      <NavAndMain>
+        <Sidenav />
+        <Main>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/authentication" element={<Authentication />} />
+            <Route path="/comming-soon" element={<CommingSoon />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Main>
+      </NavAndMain>
       <GlobalStyle />
     </BrowserRouter>
   );
