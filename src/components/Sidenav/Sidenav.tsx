@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import {
   Breakpoint,
   ColorPalette,
   MediaQuery,
   Spacing,
+  zIndex,
 } from "../../config/style";
 import useMedia from "../../hooks/useMedia";
 import { ReactComponent as ArrowIcon } from "../../images/arrow.svg";
@@ -16,7 +18,7 @@ const MainContainer = styled.aside`
   flex-direction: column;
   gap: ${Spacing[6]};
   justify-content: center;
-  z-index: 1;
+  z-index: ${zIndex.positive};
   transition: all 0.5s ease-in;
 
   ${MediaQuery.xs} {
@@ -28,16 +30,14 @@ const MainContainer = styled.aside`
     background: "none";
 
       ${({ $isMenuOpen }: { $isMenuOpen: boolean }) =>
-        css`
-          ${$isMenuOpen &&
-          `
+        $isMenuOpen &&
+        `
           left: 0;
-          background: ${ColorPalette.darkerBackground};
+          background: ${ColorPalette.backgroundTransparent};
           width: 100%;
           padding-right: 20px;
         `}
-        `}
-  }  
+    }  
   }
 `;
 
@@ -58,9 +58,10 @@ const Arrow = styled(ArrowIcon)`
     isMenuOpen && "rotate(-180deg)"};
 `;
 
-const Link = styled.li`
+const LinkStyled = styled(Link)`
   color: ${ColorPalette.lightText};
   background: ${ColorPalette.primary};
+  display: block;
   padding: ${Spacing[6]};
   padding-left: ${Spacing[12]};
   border: 2px solid ${ColorPalette.black};
@@ -68,14 +69,9 @@ const Link = styled.li`
   border-radius: 0 20px 20px 0;
   margin: ${Spacing[12]} 0;
   list-style-type: none;
-  position: relative;
   width: 90%;
   transition: all 0.3s ease-in;
-
-  :hover {
-    width: 100%;
-    padding-left: ${Spacing[18]};
-  }
+  position: relative;
 
   :after {
     content: "";
@@ -92,27 +88,35 @@ const Link = styled.li`
     z-index: -1;
   }
 
-  :nth-child(odd) {
-    background: ${ColorPalette.secondary};
-
-    :after {
-      background: ${ColorPalette.secondaryDarker};
-    }
+  :hover {
+    width: 100%;
   }
 
-  ${({ $isClickable }: { $isClickable: boolean }) =>
-    $isClickable &&
-    `
-  :active {
-    top: 5px;
+  ${({ $isEven, $isClickable }: { $isEven: boolean; $isClickable: boolean }) =>
+    css`
+      ${$isEven &&
+      `
+       background: ${ColorPalette.secondary};
 
-    :after {
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-  }
-  `}
+        :after {
+          background: ${ColorPalette.secondaryDarker};
+        }
+        
+      `}
+
+      ${$isClickable &&
+      `
+       :active {
+          top: 5px;
+
+          :after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+        }
+      `}
+    `}
 
   ${MediaQuery.xs} {
     width: 100%;
@@ -122,7 +126,20 @@ const Link = styled.li`
 
 const Sidenav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ["First", "Second", "One more", "Very long title of this one"];
+  const links = [
+    {
+      name: "Authentication",
+      path: "/authentication",
+    },
+    {
+      name: "Comming soon...",
+      path: "/comming-soon",
+    },
+    {
+      name: "Comming soon...",
+      path: "/comming-soon",
+    },
+  ];
 
   const isMobile = useMedia(Breakpoint.xs);
 
@@ -139,9 +156,15 @@ const Sidenav = () => {
 
       <ul>
         {links.map((link, index) => (
-          <Link key={index} $isClickable={!isMobile || menuOpen}>
-            {link}
-          </Link>
+          <li key={index}>
+            <LinkStyled
+              to={link.path}
+              $isEven={index % 2 === 0}
+              $isClickable={!isMobile || menuOpen}
+            >
+              {link.name}
+            </LinkStyled>
+          </li>
         ))}
       </ul>
     </MainContainer>
