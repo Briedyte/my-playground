@@ -4,6 +4,8 @@ import {
   ColorPalette,
   FontFamily,
   FontWeight,
+  MediaQuery,
+  Spacing,
 } from "./config/style";
 
 const GlobalStyle = createGlobalStyle`
@@ -12,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
+    font-size: 20px;
+
+    ${MediaQuery.s}{
+        font-size: 18px;
+    }
 }
 
 
@@ -28,6 +35,9 @@ p, label, input, span, li {
     color: ${ColorPalette.black};
     font-family: ${FontFamily.nunito};
     font-weight: ${FontWeight.regular};
+}
+p {
+    margin: ${Spacing[8]} 0;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: ${FontFamily.teko};
