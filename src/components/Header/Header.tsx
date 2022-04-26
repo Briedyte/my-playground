@@ -9,7 +9,7 @@ import {
   Spacing,
   zIndex,
 } from "../../config/style";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const HeaderWrapper = styled.header`
   position: relative;
@@ -40,7 +40,8 @@ const HomeImg = styled(HomeIcon)`
   fill: ${ColorPalette.black};
 
   rect {
-    fill: ${ColorPalette.primary};
+    fill: ${({ isHome }: { isHome: boolean }) =>
+      isHome ? ColorPalette.tertuary : ColorPalette.primary};
   }
 
   :hover {
@@ -57,12 +58,16 @@ const LinkList = styled.ul`
 `;
 
 const Header = () => {
+  const location = useLocation();
+
   return (
     <HeaderWrapper>
       <Background />
       <Container>
         <ContentWrapper>
-          <HomeImg />
+          <Link to="/">
+            <HomeImg isHome={location.pathname === "/"} />
+          </Link>
           <LinkList>
             <li>Resume</li>
             <li>Contacts</li>
