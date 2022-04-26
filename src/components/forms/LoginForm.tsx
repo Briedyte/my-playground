@@ -23,15 +23,15 @@ interface FormValues {
 }
 
 const LoginForm = () => {
-  const [user, setUser] = useState<FormValues>({
+  const [formValues, setFormValues] = useState<FormValues>({
     [FormFields.password]: "",
     [FormFields.userName]: "",
   });
   const [isFormLoading, setIsFormLoading] = useState(false);
-  const [errors, setErrors] = useState({ backendError: "", serverError: "" });
+  const [errors, setErrors] = useState({ backendError: "", generalError: "" });
   const { login } = useAuth();
 
-  const isFormValid = () => Object.values(user).every((detail) => detail);
+  const isFormValid = () => Object.values(formValues).every((detail) => detail);
 
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const LoginForm = () => {
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(formValues),
         headers: {
           "content-type": "application/json",
         },
@@ -54,13 +54,13 @@ const LoginForm = () => {
         setIsFormLoading(false);
       }
     } catch (err) {
-      setErrors({ ...errors, serverError: "Something went wrong..." });
+      setErrors({ ...errors, generalError: "Something went wrong..." });
       setIsFormLoading(false);
     }
   };
 
   const handleSubmit = async () => {
-    setErrors({ backendError: "", serverError: "" });
+    setErrors({ backendError: "", generalError: "" });
     if (!isFormValid()) {
       return;
     }
@@ -80,7 +80,10 @@ const LoginForm = () => {
         name={FormFields.userName}
         label="User name"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.userName]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.userName]: e.currentTarget.value,
+          })
         }
         required
       />
@@ -89,12 +92,15 @@ const LoginForm = () => {
         name={FormFields.password}
         label="Password"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.password]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.password]: e.currentTarget.value,
+          })
         }
         inputType={InputType.password}
         required
       />
-      <FormError message={errors.backendError || errors.serverError} />
+      <FormError message={errors.backendError || errors.generalError} />
       <Button type="submit" disabled={isFormLoading}>
         {isFormLoading ? "Loading..." : "Login"}
       </Button>
