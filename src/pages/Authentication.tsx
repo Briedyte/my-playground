@@ -38,10 +38,12 @@ const RegisterFormWrapper = styled.div`
 
 const Authentication = () => {
   const [leftContainerActive, setLeftContainerActive] = useState(true);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   return (
     <Container>
       <h2>You have to be logged in to see a picture of a cute doggo!</h2>
+      {registrationSuccess && <p>Success! You can log in now.</p>}
       <AuthenticationContainer>
         <LoginFormWrapper isActive={leftContainerActive}>
           <CroppedContainer
@@ -59,7 +61,12 @@ const Authentication = () => {
             isActive={!leftContainerActive}
             onTitleClick={() => setLeftContainerActive(false)}
           >
-            <RegistrationForm onSuccess={() => setLeftContainerActive(true)} />
+            <RegistrationForm
+              onSuccess={() => {
+                setLeftContainerActive(true);
+                setRegistrationSuccess(true);
+              }}
+            />
           </CroppedContainer>
         </RegisterFormWrapper>
       </AuthenticationContainer>

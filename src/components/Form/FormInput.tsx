@@ -109,6 +109,7 @@ interface FormInputProps {
   name: string;
   id: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
   errorMessage?: string;
   required?: boolean;
   onBlur?: (inputValue: string) => void;
@@ -123,6 +124,7 @@ const FormInput = ({
   required = false,
   errorMessage = "",
   onBlur,
+  value,
 }: FormInputProps) => {
   const [inputFocused, setInputFocused] = useState(false);
   const [requiredErrorShown, setRequiredErrorShown] = useState(false);
@@ -139,6 +141,7 @@ const FormInput = ({
         <Input
           id={id}
           name={name}
+          value={value && value}
           type={inputType}
           onFocus={() => setInputFocused(true)}
           onBlur={(e) => {

@@ -15,11 +15,11 @@ const headers = {
   "X-RapidAPI-Key": `${process.env.REACT_APP_X_RAPIDAPI_API_KEY}`,
 };
 
-const url =
-  "https://fake-authentication1.p.rapidapi.com/api/v1/authentication/register";
+const baseUrl =
+  "https://fake-authentication1.p.rapidapi.com/api/v1/authentication/";
 
 app.post("/register", async (req, res) => {
-  const response = await fetch(url, {
+  const response = await fetch(`${baseUrl}"register"`, {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: headers,
@@ -31,7 +31,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const response = await fetch(url, {
+  const response = await fetch(`${baseUrl}login`, {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: headers,

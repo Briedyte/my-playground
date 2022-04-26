@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Spacing } from "../../config/style";
+import { formBaseStyle } from "../../config/style";
+
 import Button from "../Button";
+import FormError from "../Form/FormError";
 import FormInput, { InputType } from "../Form/FormInput";
 
 const RegexRules = {
@@ -9,6 +11,10 @@ const RegexRules = {
   password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
   email: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
 };
+
+const Form = styled.form`
+  ${formBaseStyle}
+`;
 
 enum FormFields {
   firstName = "fName",
@@ -28,91 +34,116 @@ interface FormValues {
   [FormFields.userName]: string;
 }
 
-const Form = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
+const defaultFormValues = {
+  [FormFields.firstName]: "",
+  [FormFields.lastName]: "",
+  [FormFields.email]: "",
+  [FormFields.password]: "",
+  [FormFields.confirmPassword]: "",
+  [FormFields.userName]: "",
+};
 
 const RegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
-  const [user, setUser] = useState<FormValues>({
-    [FormFields.firstName]: "",
-    [FormFields.lastName]: "",
-    [FormFields.email]: "",
-    [FormFields.password]: "",
-    [FormFields.confirmPassword]: "",
-    [FormFields.userName]: "",
+  const [formValues, setFormValues] = useState<FormValues>({
+    ...defaultFormValues,
   });
-  const [inputErrors, setInputErrors] = useState({
-    [FormFields.email]: "",
-    [FormFields.password]: "",
-    [FormFields.confirmPassword]: "",
-    [FormFields.userName]: "",
+  const [errors, setErrors] = useState({
+    invalidEmail: "",
+    badPassword: "",
+    passwordsDoNotMatch: "",
+    badUserName: "",
+    backendError: "",
+    generalError: "",
   });
   const [isFormLoading, setIsFormLoading] = useState(false);
 
   const isFormValid = () =>
-    Object.values(user).every((item) => item) &&
-    Object.values(inputErrors).every((error) => !error);
+    Object.values(formValues).every((item) => item) &&
+    Object.values(errors).every((error) => !error);
 
   const registerUser = async () => {
-    if (!isFormValid()) {
-      return;
-    }
-
-    setIsFormLoading(true);
-
     try {
       const response = await fetch("http://localhost:8000/register", {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(formValues),
         headers: {
           "content-type": "application/json",
         },
-      });
-      setIsFormLoading(false);
-      onSuccess();
-      console.log(response);
+      }).then((res) => res.ok && res.json());
+
+      if (response.authToken) {
+        onSuccess();
+        setIsFormLoading(false);
+        setFormValues(defaultFormValues);
+      } else {
+        response.message &&
+          setErrors({ ...errors, backendError: response.message });
+        setIsFormLoading(false);
+      }
     } catch (err) {
       setIsFormLoading(false);
-      console.log(err);
+      setErrors({ ...errors, generalError: "Something went wrong..." });
     }
+  };
+
+  const handleSubmit = () => {
+    setErrors({ ...errors, backendError: "" });
+    if (!isFormValid()) {
+      return;
+    }
+    setIsFormLoading(true);
+    registerUser();
   };
 
   return (
     <Form
       onSubmit={(e) => {
         e.preventDefault();
-        registerUser();
+        handleSubmit();
       }}
     >
       <FormInput
+        id="First name"
         name={FormFields.firstName}
+        value={formValues.fName}
         label="First name"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.firstName]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.firstName]: e.currentTarget.value,
+          })
         }
         required
       />
       <FormInput
+        id="Last name"
         name={FormFields.lastName}
+        value={formValues.lName}
         label="Last name"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.lastName]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.lastName]: e.currentTarget.value,
+          })
         }
         required
       />
       <FormInput
+        id="Email"
         name={FormFields.email}
+        value={formValues.email}
         label="Email"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.email]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.email]: e.currentTarget.value,
+          })
         }
-        errorMessage={inputErrors.email}
+        errorMessage={errors.invalidEmail}
         onBlur={(inputValue) =>
-          setInputErrors({
-            ...inputErrors,
-            [FormFields.email]: !inputValue.match(RegexRules.email)
+          setErrors({
+            ...errors,
+            invalidEmail: !inputValue.match(RegexRules.email)
               ? "Insert valid email."
               : "",
           })
@@ -120,34 +151,42 @@ const RegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
         required
       />
       <FormInput
+        id="Username"
         name={FormFields.userName}
+        value={formValues.userName}
         label="Username"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.userName]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.userName]: e.currentTarget.value,
+          })
         }
-        errorMessage={inputErrors.userName}
+        errorMessage={errors.badUserName}
         onBlur={(inputValue: string) =>
-          setInputErrors({
-            ...inputErrors,
-            [FormFields.userName]: !inputValue.match(RegexRules.user)
-              ? "Username should be 8-20 characters long and have no special characters."
-              : "",
+          setErrors({
+            ...errors,
+            badUserName: "",
           })
         }
         required
       />
       <FormInput
+        id="Password"
         inputType={InputType.password}
         name={FormFields.password}
+        value={formValues.password}
         label="Password"
         onChange={(e) =>
-          setUser({ ...user, [FormFields.password]: e.currentTarget.value })
+          setFormValues({
+            ...formValues,
+            [FormFields.password]: e.currentTarget.value,
+          })
         }
-        errorMessage={inputErrors.password}
+        errorMessage={errors.badPassword}
         onBlur={(inputValue) =>
-          setInputErrors({
-            ...inputErrors,
-            [FormFields.password]: !inputValue.match(RegexRules.password)
+          setErrors({
+            ...errors,
+            badPassword: !inputValue.match(RegexRules.password)
               ? "Password must be minimum 8 characters, contain at least one letter and one number."
               : "",
           })
@@ -155,27 +194,32 @@ const RegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
         required
       />
       <FormInput
+        id="Confirm password"
         inputType={InputType.password}
         name={FormFields.confirmPassword}
+        value={formValues.confirmPassword}
         label="Confirm password"
         onChange={(e) =>
-          setUser({
-            ...user,
+          setFormValues({
+            ...formValues,
             [FormFields.confirmPassword]: e.currentTarget.value,
           })
         }
-        errorMessage={inputErrors.confirmPassword}
+        errorMessage={errors.passwordsDoNotMatch}
         onBlur={(inputValue) =>
-          setInputErrors({
-            ...inputErrors,
-            [FormFields.confirmPassword]:
-              inputValue !== user.password ? "Passwords do not match" : "",
+          setErrors({
+            ...errors,
+            passwordsDoNotMatch:
+              inputValue !== formValues.password
+                ? "Passwords do not match"
+                : "",
           })
         }
         required
       />
+      <FormError message={errors.backendError || errors.generalError} />
       <Button type="submit" disabled={isFormLoading}>
-        {isFormLoading ? "Loading..." : "Sign in"}
+        {isFormLoading ? "Loading..." : "Register"}
       </Button>
     </Form>
   );
