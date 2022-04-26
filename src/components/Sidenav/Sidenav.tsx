@@ -18,7 +18,7 @@ const MainContainer = styled.aside`
   flex-direction: column;
   gap: ${Spacing[6]};
   justify-content: center;
-  z-index: ${zIndex.positive};
+  z-index: ${zIndex.sidenav};
   transition: all 0.5s ease-in;
 
   ${MediaQuery.xs} {
