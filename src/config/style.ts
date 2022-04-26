@@ -20,6 +20,7 @@ export const zIndex = {
   positive: 1,
   button: 2,
   activeCroppedContainer: 2,
+  sidenav: 3,
 } as const;
 
 export const baseFontSize = "16px";
