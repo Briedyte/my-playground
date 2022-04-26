@@ -67,12 +67,10 @@ const Homepage = () => {
           </div>
           <div>
             <MainTitle>Welcome to my playground!</MainTitle>
-            <p>
-              Last year I decided to retrain myself as a web developer and
-              lately I started focusing only on front-end. This is where I
-              practice it.
-            </p>
-            <p>You can look aroundo or simply...</p>
+            <p>I created this app to work on my front end skills.</p>
+            <p>It is still quite fresh and more stuff comming soon.</p>
+            <br />
+            <p>In a meantime you can...</p>
           </div>
           <BalloonGame />
         </LeftItemsWrapper>

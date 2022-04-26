@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   ColorPalette,
+  FontFamily,
   FontSize,
   MediaQuery,
   Spacing,
@@ -36,6 +37,21 @@ const randomCloudAnimationDurations = Array.from(Array(countOfClouds)).map(
 const Title = styled.h3`
   color: ${ColorPalette.secondary};
   font-size: ${FontSize[30]};
+`;
+
+const IdleBalloonWrapper = styled.div`
+  position: relative;
+`;
+
+const ClickText = styled.p`
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: ${FontFamily.teko};
+  font-size: ${FontSize[28]};
+  color: ${ColorPalette.black};
 `;
 
 const IdleBalloonImg = styled.img`
@@ -284,13 +300,16 @@ const BalloonGame = () => {
   return (
     <div>
       <Title>Play with balloon! </Title>
-      <p>Click on the ballon to open the game</p>
-      <IdleBalloonImg
-        src={Balloon}
-        alt="Balloon"
-        onClick={() => setGameStage(GameStages.ready)}
-        isGameOpen={gameStage !== GameStages.idle}
-      />
+      <p>Click on the ballon to open the game.</p>
+      <IdleBalloonWrapper>
+        <IdleBalloonImg
+          src={Balloon}
+          alt="Balloon"
+          onClick={() => setGameStage(GameStages.ready)}
+          isGameOpen={gameStage !== GameStages.idle}
+        />
+        {gameStage === GameStages.idle && <ClickText>Click me</ClickText>}
+      </IdleBalloonWrapper>
       {gameStage !== GameStages.idle && (
         <ActiveGameContainer>
           <CloseButton
