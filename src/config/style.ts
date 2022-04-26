@@ -115,3 +115,11 @@ export const MediaQuery = {
 };
 
 export const headerHeight = 13;
+
+export const formBaseStyle = `
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: ${Spacing[11]};
+  align-items: center;
+`;

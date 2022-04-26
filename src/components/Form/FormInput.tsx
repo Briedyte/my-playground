@@ -107,6 +107,7 @@ interface FormInputProps {
   inputType?: InputType;
   label: string;
   name: string;
+  id: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage?: string;
   required?: boolean;
@@ -117,6 +118,7 @@ const FormInput = ({
   inputType = InputType.text,
   label,
   name,
+  id,
   onChange,
   required = false,
   errorMessage = "",
@@ -129,12 +131,13 @@ const FormInput = ({
 
   return (
     <MainContainer>
-      <Label $isFocused={inputFocused} $hasError={hasError}>
+      <Label $isFocused={inputFocused} $hasError={hasError} htmlFor={id}>
         {label}
       </Label>
       <InputContainer>
         <InputBorders $isFocused={inputFocused} $hasError={hasError} />
         <Input
+          id={id}
           name={name}
           type={inputType}
           onFocus={() => setInputFocused(true)}
