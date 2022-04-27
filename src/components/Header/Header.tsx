@@ -41,12 +41,12 @@ const HomeImg = styled(HomeIcon)`
 
   rect {
     fill: ${({ isHome }: { isHome: boolean }) =>
-      isHome ? ColorPalette.tertuary : ColorPalette.primary};
+      isHome ? ColorPalette.tertiary : ColorPalette.primary};
   }
 
   :hover {
     rect {
-      fill: ${ColorPalette.tertuary};
+      fill: ${ColorPalette.tertiary};
     }
   }
 `;

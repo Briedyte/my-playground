@@ -9,7 +9,7 @@ export const ColorPalette = {
   secondary: "#e67500",
   secondaryLighter: "#e99a48",
   secondaryDarker: "#b15d06",
-  tertuary: "#ffc422",
+  tertiary: "#ffc422",
   balloonGameBackground: "#e8faff",
   black: "#282828",
   error: "#ef4a13",
@@ -21,6 +21,7 @@ export const zIndex = {
   button: 2,
   activeCroppedContainer: 2,
   sidenav: 3,
+  baloonGameContainer: 4,
 } as const;
 
 export const baseFontSize = "16px";
