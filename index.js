@@ -19,7 +19,7 @@ const baseUrl =
   "https://fake-authentication1.p.rapidapi.com/api/v1/authentication/";
 
 app.post("/register", async (req, res) => {
-  const response = await fetch(`${baseUrl}"register"`, {
+  const response = await fetch(`${baseUrl}register`, {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: headers,
