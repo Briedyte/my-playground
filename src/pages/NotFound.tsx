@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { FontSize } from "../config/style";
 
 const Maincontainer = styled.div`
   display: grid;
@@ -9,7 +10,7 @@ const Maincontainer = styled.div`
 `;
 
 const StyledSpan = styled.span`
-  font-size: 250px;
+  font-size: ${FontSize[80]};
 `;
 
 const NotFound = () => {
@@ -19,7 +20,7 @@ const NotFound = () => {
         <p>
           <StyledSpan>404</StyledSpan>
         </p>
-        <p>It is not only that tha page you are looking fot is not fount...</p>
+        <p>It is not only that tha page you are looking for is not found...</p>
         <p>...but also the "Not Found" page is not properly styled yet!</p>
       </div>
     </Maincontainer>
