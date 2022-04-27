@@ -6,27 +6,38 @@ import {
   FontFamily,
   FontSize,
   Spacing,
+  zIndex,
 } from "../../config/style";
-
-export enum CroppedContainerTitleSide {
-  right = "right",
-  left = "left",
-}
 
 interface TitleButtonOptions {
   titleSideLeft: boolean;
   isActive: boolean;
 }
 
-const TitleButton = styled.button`
+const MainContainer = styled.div`
   width: 100%;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100px;
+`;
+
+const TitleButton = styled.button`
   border: none;
   font-family: ${FontFamily.teko};
+  font-size: ${FontSize[28]};
   cursor: pointer;
   color: ${ColorPalette.backgroundSolidLighter};
-  font-size: ${FontSize[28]};
   background: ${ColorPalette.primary};
   border-radius: 7px 7px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 
   ${({ titleSideLeft, isActive }: TitleButtonOptions) =>
     css`
@@ -34,6 +45,7 @@ const TitleButton = styled.button`
       `
         color: ${ColorPalette.primary};
         background: ${ColorPalette.backgroundSolidDarker};
+        z-index: ${isActive ? zIndex.activeCroppedContainer : zIndex.positive};
       `}
 
       ${titleSideLeft &&
@@ -70,55 +82,53 @@ const ContentWrapper = styled.div`
     right: 0;
     background: ${ColorPalette.primary};
     height: 170px;
-  }
-
-  ${({
-    isActive,
-    coloredCornerLeft,
-  }: {
-    isActive: boolean;
-    coloredCornerLeft: boolean;
-  }) => css`
-    display: ${isActive ? "block" : "none"};
-
-    :after {
-      clip-path: ${coloredCornerLeft
+    clip-path: ${({ coloredCornerLeft }: { coloredCornerLeft: boolean }) =>
+      coloredCornerLeft
         ? "polygon(0 0, 0% 100%, 100% 100%)"
         : "polygon(100% 0, 0% 100%, 100% 100%)"};
-    }
-  `}
+  }
 `;
 
-interface CroppedContainerProps {
-  children: React.ReactNode;
-  title: string;
-  onTitleClick?: () => void;
-  titleSide?: CroppedContainerTitleSide;
-  isActive?: boolean;
+interface TwoTabsProps {
+  leftTabTitle: string;
+  rightTabTitle: string;
+  onTabClick: () => void;
+  leftContent: React.ReactNode;
+  rightContent: React.ReactNode;
+  leftTabOpen: boolean;
 }
-const CroppedContainer = ({
-  children,
-  title,
-  onTitleClick,
-  titleSide = CroppedContainerTitleSide.left,
-  isActive = true,
-}: CroppedContainerProps) => {
-  const titleSideLeft = titleSide === CroppedContainerTitleSide.left;
-
+const TwoTabs = ({
+  leftTabTitle,
+  rightTabTitle,
+  leftContent,
+  rightContent,
+  leftTabOpen,
+  onTabClick,
+}: TwoTabsProps) => {
   return (
-    <>
-      <TitleButton
-        titleSideLeft={titleSideLeft}
-        isActive={isActive}
-        onClick={() => onTitleClick && onTitleClick()}
-      >
-        {title}
-      </TitleButton>
-      <ContentWrapper isActive={isActive} coloredCornerLeft={titleSideLeft}>
-        {children}
+    <MainContainer>
+      <ButtonsWrapper>
+        <TitleButton
+          titleSideLeft={true}
+          isActive={leftTabOpen}
+          onClick={() => onTabClick()}
+        >
+          {leftTabTitle}
+        </TitleButton>
+        <TitleButton
+          titleSideLeft={false}
+          isActive={!leftTabOpen}
+          onClick={() => onTabClick()}
+        >
+          {rightTabTitle}
+        </TitleButton>
+      </ButtonsWrapper>
+
+      <ContentWrapper coloredCornerLeft={leftTabOpen}>
+        {leftTabOpen ? leftContent : rightContent}
       </ContentWrapper>
-    </>
+    </MainContainer>
   );
 };
 
-export default CroppedContainer;
+export default TwoTabs;
