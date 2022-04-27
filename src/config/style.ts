@@ -21,6 +21,7 @@ export const zIndex = {
   button: 2,
   activeCroppedContainer: 2,
   sidenav: 3,
+  baloonGameContainer: 4,
 } as const;
 
 export const baseFontSize = "16px";

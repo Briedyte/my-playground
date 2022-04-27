@@ -46,12 +46,13 @@ const IdleBalloonWrapper = styled.div`
 const ClickText = styled.p`
   position: absolute;
   left: 50%;
-  top: 30%;
-  transform: translate(-50%, -50%);
+  top: 35%;
+  transform: translate(-50%, -50%) rotate(-8deg);
   pointer-events: none;
   font-family: ${FontFamily.teko};
   font-size: ${FontSize[28]};
   color: ${ColorPalette.black};
+  transform-origin: center;
 `;
 
 const IdleBalloonImg = styled.img`
@@ -80,13 +81,13 @@ const IdleBalloonImg = styled.img`
 const ActiveGameContainer = styled.section`
   @keyframes backgroundAppear {
     0% {
-      background: none;
+      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
     }
     100% {
-      background: ${ColorPalette.balloonGameBackground};
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
   }
-
+  background: ${ColorPalette.balloonGameBackground};
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -94,13 +95,13 @@ const ActiveGameContainer = styled.section`
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: ${zIndex.positive};
+  z-index: ${zIndex.baloonGameContainer};
   animation: backgroundAppear 1s ease-in forwards;
 `;
 
 const CloseButton = styled.button`
   border: 0;
-  background: ${ColorPalette.tertuary};
+  background: ${ColorPalette.tertiary};
   z-index: ${zIndex.positive};
   cursor: pointer;
   height: 40px;
@@ -218,22 +219,10 @@ const GameBalloon = styled.img`
 `;
 
 const GameRules = styled.p`
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
   margin: 10% auto 0;
   font-size: ${FontSize[40]};
   z-index: ${zIndex.positive};
   pointer-events: none;
-  animation: appear 1s forwards linear;
   position: relative;
 `;
 
