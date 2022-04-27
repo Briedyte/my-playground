@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.js": "/my-playground/static/js/main.7c309254.js",
+    "main.js": "/my-playground/static/js/main.75f45a37.js",
     "static/media/slide.png": "/my-playground/static/media/slide.fe24dc02565a5b14c6b1.png",
     "static/media/balloon.png": "/my-playground/static/media/balloon.78bca6df869e6a07b4f7.png",
+    "static/media/tooltip.svg": "/my-playground/static/media/tooltip.4498e272626a1aef022650015d39884c.svg",
     "static/media/frame.svg": "/my-playground/static/media/frame.8072e4fa9e07edda86599a821977c99a.svg",
     "static/media/cloud.svg": "/my-playground/static/media/cloud.69375875c14737c7a9740ad66bbe77e2.svg",
     "static/media/dashedArrow.svg": "/my-playground/static/media/dashedArrow.c22fd26fcc9350584475de9e7d7f1728.svg",
@@ -11,9 +12,9 @@
     "static/media/arrow.svg": "/my-playground/static/media/arrow.9c764b6e60991e84482350631a9f2165.svg",
     "index.html": "/my-playground/index.html",
     "static/media/input.svg": "/my-playground/static/media/input.6b3a6d60179f67dd2ceedecf41931229.svg",
-    "main.7c309254.js.map": "/my-playground/static/js/main.7c309254.js.map"
+    "main.75f45a37.js.map": "/my-playground/static/js/main.75f45a37.js.map"
   },
   "entrypoints": [
-    "static/js/main.7c309254.js"
+    "static/js/main.75f45a37.js"
   ]
 }
