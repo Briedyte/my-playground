@@ -10,7 +10,7 @@ import Authentication from "./pages/Authentication";
 import NotFound from "./pages/NotFound";
 import CommingSoon from "./pages/CommingSoon";
 
-import { MediaQuery, Spacing } from "./config/style";
+import { MediaQuery, Spacing, sidenavWidth } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
 
 import { headerHeight } from "./config/style";
@@ -19,14 +19,17 @@ import Userpage from "./pages/Userpage";
 import RequireAuth from "./hoc/RequireAuth";
 
 const NavAndMain = styled.div`
-  height: ${100 - headerHeight}%;
+  min-height: calc(100% - ${headerHeight});
   display: flex;
 `;
 
 const Main = styled.main`
   padding-top: ${Spacing[16]};
-  width: 100%;
-  min-height: inherit;
+  width: calc(100% - ${sidenavWidth});
+  margin-right: 0;
+  margin-left: auto;
+  min-height: 100%;
+
   ${MediaQuery.xs} {
     padding-left: 50px;
   }

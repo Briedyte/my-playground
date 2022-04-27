@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { MediaQuery, Spacing } from "../../config/style";
 
 const ContainerWrapper = styled.div`
+  height: 100%;
   padding: ${({ withTopBottomMargins }: { withTopBottomMargins: boolean }) =>
-    withTopBottomMargins ? `${Spacing[60]} ${Spacing[100]}` : `0 ${Spacing[100]}`};
+    withTopBottomMargins
+      ? `${Spacing[60]} ${Spacing[100]}`
+      : `0 ${Spacing[100]}`};
+
   ${MediaQuery.m} {
     padding: 0 ${Spacing[24]};
   }
