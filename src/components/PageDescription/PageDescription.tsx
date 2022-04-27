@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Button";
 import { ButtonVariant } from "../Button/Button";
 
@@ -10,6 +10,8 @@ import { ColoredContainerColor } from "../ColoredContainer/ColoredContainer";
 
 const ContainerAndArrow = styled.div`
   display: flex;
+  max-width: 500px;
+  margin: 0 auto;
 `;
 
 const Text = styled.p`
@@ -29,12 +31,20 @@ const Arrow = styled(DashedArrow)`
     reversed ? "scaleX(-1)" : "none"};
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  margin-right: ${Spacing[60]};
+`;
+
 interface PageDescriptionProps {
   mainDescription: string;
   steps: string[];
 }
 
 const PageDescription = ({ mainDescription, steps }: PageDescriptionProps) => {
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+
   const getColor = (index: number) => {
     if (index % 3 === 0) {
       return ColoredContainerColor.primary;
@@ -49,25 +59,34 @@ const PageDescription = ({ mainDescription, steps }: PageDescriptionProps) => {
   return (
     <section>
       <p>{mainDescription}</p>
-      {steps.map((step, index) => {
-        const isOdd = index % 2 !== 0;
-        const isLast = index === steps.length - 1;
-        const containerColor = getColor(index);
+      {descriptionExpanded &&
+        steps.map((step, index) => {
+          const isOdd = index % 2 !== 0;
+          const isLast = index === steps.length - 1;
+          const containerColor = getColor(index);
 
-        return (
-          <ContainerAndArrow key={index}>
-            {isOdd && !isLast && <Arrow reversed={true} />}
-            <ColoredContainer reversed={isOdd} color={containerColor}>
-              <Text isLight={containerColor !== ColoredContainerColor.tertiary}>
-                {step}
-              </Text>
-            </ColoredContainer>
-            {!isOdd && !isLast && <Arrow reversed={false} />}
-          </ContainerAndArrow>
-        );
-      })}
-
-      <Button variant={ButtonVariant.transparentDark}>Tell me more...</Button>
+          return (
+            <ContainerAndArrow key={index}>
+              {isOdd && !isLast && <Arrow reversed={true} />}
+              <ColoredContainer reversed={isOdd} color={containerColor}>
+                <Text
+                  isLight={containerColor !== ColoredContainerColor.tertiary}
+                >
+                  {step}
+                </Text>
+              </ColoredContainer>
+              {!isOdd && !isLast && <Arrow reversed={false} />}
+            </ContainerAndArrow>
+          );
+        })}
+      <ButtonWrapper>
+        <Button
+          variant={ButtonVariant.transparentDark}
+          onClick={() => setDescriptionExpanded((prev) => !prev)}
+        >
+          {descriptionExpanded ? "Tell me less!" : "Tell me more..."}
+        </Button>
+      </ButtonWrapper>
     </section>
   );
 };
