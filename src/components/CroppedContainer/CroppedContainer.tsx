@@ -14,13 +14,9 @@ export enum CroppedContainerTitleSide {
 }
 
 interface TitleButtonOptions {
-  titleSide: CroppedContainerTitleSide;
+  titleSideLeft: boolean;
   isActive: boolean;
 }
-
-const MainContainer = styled.div`
-  position: relative;
-`;
 
 const TitleButton = styled.button`
   width: 100%;
@@ -30,69 +26,67 @@ const TitleButton = styled.button`
   color: ${ColorPalette.backgroundSolidLighter};
   font-size: ${FontSize[28]};
   background: ${ColorPalette.primary};
-  border-radius: 20px 20px 0 0;
-  position: relative;
+  border-radius: 7px 7px 0 0;
 
-  :before {
-    content: "";
-    background: ${ColorPalette.black};
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-  }
-
-  ${({ titleSide, isActive }: TitleButtonOptions) =>
+  ${({ titleSideLeft, isActive }: TitleButtonOptions) =>
     css`
       ${isActive &&
-      css`
+      `
         color: ${ColorPalette.primary};
         background: ${ColorPalette.backgroundSolidDarker};
       `}
 
-      ${titleSide === CroppedContainerTitleSide.left &&
-      css`
+      ${titleSideLeft &&
+      `
         text-align: left;
         clip-path: polygon(0 0, 45% 0%, 101% 100%, 0% 100%);
-        padding: ${Spacing[6]} 50% ${Spacing[40]} ${Spacing[40]};
-        border-left: 3px solid ${ColorPalette.black};
-
-        :before {
-          clip-path: polygon(
-            0 0,
-            100% 0%,
-            100% 100%,
-            99.9% 100%,
-            44.5% 2%,
-            0 1%
-          );
-        }
+        padding: ${Spacing[6]} 60% ${Spacing[40]} ${Spacing[40]};
       `}
 
-      ${titleSide === CroppedContainerTitleSide.right &&
-      css`
+      ${!titleSideLeft &&
+      `
         text-align: right;
         clip-path: polygon(55% 0, 100% 0, 100% 100%, -2% 100%);
-        border-right: 3px solid ${ColorPalette.black};
-        padding: ${Spacing[6]} ${Spacing[40]} ${Spacing[40]} 50%};
+        padding: ${Spacing[6]} ${Spacing[40]} ${Spacing[40]} 60%};
 
-        :before {
-          clip-path: polygon(0 0, 100% 0, 100% 1.6%, 55.5% 3%, 0% 100%, 0 100%);
-        }
       `}
     `}
 `;
 
 const ContentWrapper = styled.div`
-  border: 3px solid ${ColorPalette.black};
   border-top: none;
   background: ${ColorPalette.backgroundSolidDarker};
   padding: ${Spacing[40]};
+  position: relative;
   pointer-events: all;
-  display: ${({ isActive }: { isActive: boolean }) =>
-    isActive ? "block" : "none"};
+  border-radius: 0 0 5px 5px;
+  padding-bottom: ${Spacing[160]};
+
+  :after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    right: 0;
+    background: ${ColorPalette.primary};
+    height: 170px;
+  }
+
+  ${({
+    isActive,
+    coloredCornerLeft,
+  }: {
+    isActive: boolean;
+    coloredCornerLeft: boolean;
+  }) => css`
+    display: ${isActive ? "block" : "none"};
+
+    :after {
+      clip-path: ${coloredCornerLeft
+        ? "polygon(0 0, 0% 100%, 100% 100%)"
+        : "polygon(100% 0, 0% 100%, 100% 100%)"};
+    }
+  `}
 `;
 
 interface CroppedContainerProps {
@@ -109,17 +103,21 @@ const CroppedContainer = ({
   titleSide = CroppedContainerTitleSide.left,
   isActive = true,
 }: CroppedContainerProps) => {
+  const titleSideLeft = titleSide === CroppedContainerTitleSide.left;
+
   return (
-    <MainContainer>
+    <>
       <TitleButton
-        titleSide={titleSide}
+        titleSideLeft={titleSideLeft}
         isActive={isActive}
         onClick={() => onTitleClick && onTitleClick()}
       >
         {title}
       </TitleButton>
-      <ContentWrapper isActive={isActive}>{children}</ContentWrapper>
-    </MainContainer>
+      <ContentWrapper isActive={isActive} coloredCornerLeft={titleSideLeft}>
+        {children}
+      </ContentWrapper>
+    </>
   );
 };
 
