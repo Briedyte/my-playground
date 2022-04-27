@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as HomeIcon } from "../../images/house.svg";
 import { ReactComponent as HeaderBackground } from "../../images/header.svg";
@@ -10,6 +10,9 @@ import {
   zIndex,
 } from "../../config/style";
 import { Link, useLocation } from "react-router-dom";
+import Button from "../Button";
+import { ButtonVariant } from "../Button/Button";
+import Tooltip from "../Tooltip";
 
 const HeaderWrapper = styled.header`
   position: relative;
@@ -51,14 +54,33 @@ const HomeImg = styled(HomeIcon)`
   }
 `;
 
-const LinkList = styled.ul`
-  display: flex;
-  list-style: none;
-  gap: ${Spacing[12]};
+const Contacts = styled.p`
+  white-space: nowrap;
+  font-weight: bold;
 `;
 
 const Header = () => {
+  const [tooltipShown, setTooltipShown] = useState(false);
   const location = useLocation();
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e: Event) => {
+      if (
+        tooltipShown &&
+        tooltipRef.current &&
+        !tooltipRef.current.contains(e.target as Node)
+      ) {
+        setTooltipShown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [tooltipShown]);
 
   return (
     <HeaderWrapper>
@@ -68,10 +90,23 @@ const Header = () => {
           <Link to="/">
             <HomeImg isHome={location.pathname === "/"} />
           </Link>
-          <LinkList>
-            <li>Resume</li>
-            <li>Contacts</li>
-          </LinkList>
+          <Tooltip
+            showTooltip={tooltipShown}
+            content={
+              <>
+                <Contacts>Tel: +370 621 75412</Contacts>
+                <Contacts>Email: em.briedyte@gmail.com</Contacts>
+              </>
+            }
+            reference={tooltipRef}
+          >
+            <Button
+              variant={ButtonVariant.transparentLight}
+              onClick={() => setTooltipShown((prev) => !prev)}
+            >
+              Contacts
+            </Button>
+          </Tooltip>
         </ContentWrapper>
       </Container>
     </HeaderWrapper>
