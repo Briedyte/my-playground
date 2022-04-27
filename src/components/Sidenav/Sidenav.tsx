@@ -5,6 +5,7 @@ import {
   Breakpoint,
   ColorPalette,
   MediaQuery,
+  sidenavWidth,
   Spacing,
   zIndex,
 } from "../../config/style";
@@ -13,16 +14,16 @@ import { ReactComponent as ArrowIcon } from "../../images/arrow.svg";
 
 const MainContainer = styled.aside`
   height: 100%;
-  width: 300px;
+  width: ${sidenavWidth};
   display: flex;
   flex-direction: column;
   gap: ${Spacing[6]};
   justify-content: center;
   z-index: ${zIndex.sidenav};
   transition: all 0.5s ease-in;
+  position: fixed;
 
   ${MediaQuery.xs} {
-    position: absolute;
     left: -260px;
     heihgt: fit-content;
     top: 0;
@@ -72,6 +73,7 @@ const LinkStyled = styled(Link)`
   width: 90%;
   transition: all 0.3s ease-in;
   position: relative;
+  pointer-events: none;
 
   :after {
     content: "";
@@ -106,6 +108,8 @@ const LinkStyled = styled(Link)`
 
       ${$isClickable &&
       `
+       pointer-events: all;
+
        :active {
           top: 5px;
 
@@ -161,6 +165,7 @@ const Sidenav = () => {
               to={link.path}
               $isEven={index % 2 === 0}
               $isClickable={!isMobile || menuOpen}
+              onClick={() => setMenuOpen(false)}
             >
               {link.name}
             </LinkStyled>

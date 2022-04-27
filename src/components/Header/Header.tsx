@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 const HeaderWrapper = styled.header`
   position: relative;
   width: 100%;
-  height: ${headerHeight}%;
+  height: ${headerHeight};
   z-index: ${zIndex.positive};
   padding-bottom: ${Spacing[11]};
 `;
