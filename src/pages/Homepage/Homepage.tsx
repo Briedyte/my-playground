@@ -6,11 +6,13 @@ import {
   MediaQuery,
   Spacing,
   zIndex,
-} from "../../config/style";
+} from "@config/style";
 
-import Container from "../../components/Container";
-import Slide from "../../images/slide.png";
-import BalloonGame from "../../components/BalloonGame";
+import Container from "@components/Container";
+import BalloonGame from "@components/BalloonGame";
+import { ContainerVariant } from "@components/Container/Container";
+
+import Slide from "@images/slide.png";
 
 const HomepageContainer = styled.div`
   text-align: center;
@@ -59,7 +61,7 @@ const SliderImg = styled.img`
 
 const Homepage = () => {
   return (
-    <Container>
+    <Container variant={ContainerVariant.centeredContent}>
       <HomepageContainer>
         <LeftItemsWrapper>
           <div>
@@ -68,8 +70,10 @@ const Homepage = () => {
           </div>
           <div>
             <MainTitle>Welcome to my playground!</MainTitle>
-            <p>I created this app to work on my front end skills.</p>
-            <p>It is still quite fresh and more stuff comming soon.</p>
+            <p>
+              I created this app to work on my front end skills. The project is
+              still fresh so more stuff comming soon.
+            </p>
             <br />
             <p>In a meantime you can...</p>
           </div>
