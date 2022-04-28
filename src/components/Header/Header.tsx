@@ -36,14 +36,18 @@ const ContentWrapper = styled.div`
 `;
 
 const HomeImg = styled(HomeIcon)`
-  height: 60px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
   cursor: pointer;
   fill: ${ColorPalette.black};
+  border: 2px solid ${ColorPalette.black};
+  padding: ${Spacing[16]};
+  border-radius: 30%;
+  background: ${ColorPalette.backgroundTransparent};
 
   rect {
     fill: ${({ isHome }: { isHome: boolean }) =>
-      isHome ? ColorPalette.tertiary : ColorPalette.primary};
+      isHome ? ColorPalette.tertiary : ColorPalette.backgroundTransparent};
   }
 
   :hover {
@@ -100,7 +104,7 @@ const Header = () => {
             reference={tooltipRef}
           >
             <Button
-              variant={ButtonVariant.transparentLight}
+              variant={ButtonVariant.transparent}
               onClick={() => setTooltipShown((prev) => !prev)}
             >
               Contacts
