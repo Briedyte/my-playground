@@ -14,7 +14,7 @@ export const publicRoutes: RouteInfo[] = [
   {
     path: RouteConfig.Home,
     component: Homepage,
-    title: "Home",
+    title: "My playground",
   },
   {
     path: RouteConfig.Authentication,

@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { privateRoutes, publicRoutes } from "@pages/routes";
 import NotFound from "@pages/NotFound";
 import RequireAuth from "@hoc/RequireAuth";
+import DocumentMeta from "@components/DocumentMeta";
 
 const RoutesRenderer = () => {
   return (
@@ -12,7 +13,11 @@ const RoutesRenderer = () => {
         <Route
           key={route.path}
           path={route.path}
-          element={<route.component />}
+          element={
+            <DocumentMeta title={route.title}>
+              <route.component />
+            </DocumentMeta>
+          }
         />
       ))}
       <Route element={<RequireAuth />}>
@@ -20,11 +25,22 @@ const RoutesRenderer = () => {
           <Route
             key={route.path}
             path={route.path}
-            element={<route.component />}
+            element={
+              <DocumentMeta title={route.title}>
+                <route.component />
+              </DocumentMeta>
+            }
           />
         ))}
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="*"
+        element={
+          <DocumentMeta title="Not found">
+            <NotFound />
+          </DocumentMeta>
+        }
+      />
     </Routes>
   );
 };

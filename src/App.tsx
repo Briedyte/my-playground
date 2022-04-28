@@ -10,6 +10,7 @@ import { AuthProvider } from "@context/AuthProvider";
 import Header from "@components/Header";
 import Sidenav from "@components/Sidenav";
 import RoutesRenderer from "@components/RoutesRenderer/RoutesRenderer";
+import { HelmetProvider } from "react-helmet-async";
 
 const NavAndMain = styled.div`
   min-height: calc(100% - ${headerHeight});
@@ -31,18 +32,20 @@ const Main = styled.main`
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Header />
-        <NavAndMain>
-          <Sidenav />
-          <Main>
-            <RoutesRenderer />
-          </Main>
-        </NavAndMain>
-        <GlobalStyle />
-      </BrowserRouter>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <NavAndMain>
+            <Sidenav />
+            <Main>
+              <RoutesRenderer />
+            </Main>
+          </NavAndMain>
+          <GlobalStyle />
+        </BrowserRouter>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 
