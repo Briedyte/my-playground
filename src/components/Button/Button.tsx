@@ -11,7 +11,7 @@ import {
 export enum ButtonVariant {
   default = "default",
   transparentDark = "transparentDark",
-  transparentLight = "transparentLight",
+  transparent = "transparent",
 }
 
 const ButtonWrapper = styled.div`
@@ -72,22 +72,20 @@ const ButtonStyled = styled.button`
       }
     `}
 
-    ${variant === ButtonVariant.transparentDark &&
+    ${variant === ButtonVariant.transparent &&
     css`
       color: ${ColorPalette.black};
-      font-weight: bold;
+      border-style: dotted;
+      border-width: 2px;
+      border-color: ${ColorPalette.black};
+      background: ${ColorPalette.backgroundTransparent};
+      border-radius: 30px;
+      padding: ${Spacing[12]};
+      transition: all 0.5s ease-in;
+      position: relative;
 
       :hover {
-        color: ${ColorPalette.secondary};
-      }
-    `}
-
-    ${variant === ButtonVariant.transparentLight &&
-    css`
-      color: ${ColorPalette.lightText};
-
-      :hover {
-        color: ${ColorPalette.secondary};
+        border-style: dashed;
       }
     `}
   `}
