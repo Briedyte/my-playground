@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MediaQuery, Spacing } from "../../config/style";
+import { MediaQuery, Spacing } from "@config/style";
 
 const ContainerWrapper = styled.div`
   height: 100%;

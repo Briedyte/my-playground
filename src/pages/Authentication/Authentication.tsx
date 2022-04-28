@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ColorPalette, FontSize, MediaQuery, Spacing } from "../../../config/style";
+import {
+  ColorPalette,
+  FontSize,
+  MediaQuery,
+  Spacing,
+} from "../../config/style";
 
-import Container from "../../../components/Container";
-import TwoTabs from "../../../components/TwoTabs";
-import LoginForm from "../../../components/forms/LoginForm";
-import RegistrationForm from "../../../components/forms/RegistrationForm";
-import PageDescription from "../../../components/PageDescription/PageDescription";
-
-
+import Container from "../../components/Container";
+import TwoTabs from "components/TwoTabs";
+import LoginForm from "../../components/forms/LoginForm";
+import RegistrationForm from "../../components/forms/RegistrationForm";
+import PageDescription from "../../components/PageDescription/PageDescription";
 
 const Title = styled.h2`
   font-size: ${FontSize[40]};

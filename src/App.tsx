@@ -1,18 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
-import Sidenav from "./components/Sidenav";
-
-import { MediaQuery, Spacing, sidenavWidth } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
+import { MediaQuery, Spacing, sidenavWidth, headerHeight } from "@config/style";
 
-import { headerHeight } from "./config/style";
-import { AuthProvider } from "./context/AuthProvider";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "@context/AuthProvider";
 
-import RequireAuth from "./hoc/RequireAuth";
-import RoutesRenderer from "./components/RoutesRenderer/RoutesRenderer";
+import Header from "@components/Header";
+import Sidenav from "@components/Sidenav";
+import RoutesRenderer from "@components/RoutesRenderer/RoutesRenderer";
 
 const NavAndMain = styled.div`
   min-height: calc(100% - ${headerHeight});

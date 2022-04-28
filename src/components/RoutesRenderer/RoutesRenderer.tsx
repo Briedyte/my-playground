@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import RequireAuth from "../../hoc/RequireAuth";
 
-import { publicRoutes, privateRoutes } from "../../routes/pages/routes";
-import NotFound from "../../routes/pages/NotFound";
+import { privateRoutes, publicRoutes } from "@pages/routes";
+import NotFound from "@pages/NotFound";
+import RequireAuth from "@hoc/RequireAuth";
 
 const RoutesRenderer = () => {
   return (

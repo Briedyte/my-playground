@@ -5,12 +5,13 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { LocalStorage } from "../config/constants";
+import { LocalStorage } from "@config/constants";
+
 import {
   deleteFromLocalStorage,
   localStorageEventEmitter,
   setToLocalStorage,
-} from "../utils/localStorage";
+} from "@utils/localStorage";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,

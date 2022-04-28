@@ -7,12 +7,15 @@ import {
   MediaQuery,
   Spacing,
   zIndex,
-} from "../../config/style";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import Balloon from "../../images/balloonGame/balloon.png";
-import CloudImg from "../../images/balloonGame/cloud.svg";
-import Button from "../Button";
-import PointsCounter from "../PointsCounter/PointsCounter";
+} from "@config/style";
+
+import useWindowDimensions from "@hooks/useWindowDimensions";
+
+import Balloon from "@images/balloonGame/balloon.png";
+import CloudImg from "@images/balloonGame/cloud.svg";
+
+import Button from "@components/Button";
+import PointsCounter from "@components/PointsCounter/PointsCounter";
 
 enum GameStages {
   idle = "idle",

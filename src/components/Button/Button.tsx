@@ -6,7 +6,7 @@ import {
   FontSize,
   Spacing,
   zIndex,
-} from "../../config/style";
+} from "@config/style";
 
 export enum ButtonVariant {
   default = "default",

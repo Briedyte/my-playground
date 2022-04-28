@@ -1,7 +1,8 @@
 import React, { RefObject } from "react";
 import styled from "styled-components";
-import { ColorPalette, MediaQuery, Spacing, zIndex } from "../../config/style";
-import { ReactComponent as TooltipImg } from "../../images/tooltip.svg";
+import { ColorPalette, MediaQuery, Spacing, zIndex } from "@config/style";
+
+import { ReactComponent as TooltipImg } from "@images/tooltip.svg";
 
 const MainContainer = styled.div`
   position: relative;

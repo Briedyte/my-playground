@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { formBaseStyle } from "../../config/style";
-import { useAuth } from "../../context/AuthProvider";
-import Button from "../Button";
-import FormError from "../Form/FormError";
-import FormInput, { InputType } from "../Form/FormInput";
+import { formBaseStyle } from "@config/style";
+
+import { useAuth } from "@context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+
+import Button from "@components/Button";
+import FormError from "@components/Form/FormError";
+import FormInput, { InputType } from "@components/Form/FormInput";
 
 const Form = styled.form`
   ${formBaseStyle}

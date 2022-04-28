@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import {
   ColorPalette,
   FontFamily,
   FontSize,
   Spacing,
   zIndex,
-} from "../../config/style";
+} from "@config/style";
 
 interface TimerProps {
   isActive: boolean;

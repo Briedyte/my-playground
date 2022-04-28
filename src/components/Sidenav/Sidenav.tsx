@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { RouteConfig } from "../../config/routes";
+
 import {
   Breakpoint,
   ColorPalette,
@@ -9,9 +8,13 @@ import {
   sidenavWidth,
   Spacing,
   zIndex,
-} from "../../config/style";
-import useMedia from "../../hooks/useMedia";
-import { ReactComponent as ArrowIcon } from "../../images/arrow.svg";
+} from "@config/style";
+import { RouteConfig } from "@config/routes";
+
+import { Link } from "react-router-dom";
+
+import useMedia from "@hooks/useMedia";
+import { ReactComponent as ArrowIcon } from "@images/arrow.svg";
 
 const MainContainer = styled.aside`
   height: 100%;

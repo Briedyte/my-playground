@@ -6,7 +6,7 @@ import {
   FontWeight,
   MediaQuery,
   Spacing,
-} from "./config/style";
+} from "@config/style";
 
 const GlobalStyle = createGlobalStyle`
 * {

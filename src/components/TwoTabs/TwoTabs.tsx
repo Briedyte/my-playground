@@ -7,7 +7,7 @@ import {
   FontSize,
   Spacing,
   zIndex,
-} from "../../config/style";
+} from "@config/style";
 
 interface TitleButtonOptions {
   titleSideLeft: boolean;

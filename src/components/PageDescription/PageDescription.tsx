@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import Button from "../Button";
-import { ButtonVariant } from "../Button/Button";
-
-import { ReactComponent as DashedArrow } from "../../images/dashedArrow.svg";
-import { ColorPalette, FontSize, Spacing } from "../../config/style";
 import styled from "styled-components";
-import ColoredContainer from "../ColoredContainer";
-import { ColoredContainerColor } from "../ColoredContainer/ColoredContainer";
+
+import { ColorPalette, FontSize, Spacing } from "@config/style";
+
+import Button from "@components/Button";
+import { ButtonVariant } from "@components/Button/Button";
+import ColoredContainer from "@components/ColoredContainer";
+import { ColoredContainerColor } from "@components/ColoredContainer/ColoredContainer";
+
+import { ReactComponent as DashedArrow } from "@images/dashedArrow.svg";
 
 const ContainerAndArrow = styled.div`
   display: flex;

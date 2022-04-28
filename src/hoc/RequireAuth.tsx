@@ -1,7 +1,9 @@
 import React from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { RouteConfig } from "../config/routes";
-import { useAuth } from "../context/AuthProvider";
+
+import { RouteConfig } from "@config/routes";
+
+import { useAuth } from "@context/AuthProvider";
 
 const RequireAuth = () => {
   const { isLoggedIn } = useAuth();

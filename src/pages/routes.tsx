@@ -1,8 +1,8 @@
-import { RouteConfig } from "../../config/routes";
-import Authentication from "./Authentication";
-import CommingSoon from "./CommingSoon";
-import Homepage from "./Homepage";
-import Userpage from "./Userpage";
+import { RouteConfig } from "@config/routes";
+import Authentication from "@pages/Authentication";
+import Homepage from "@pages/Homepage";
+import Userpage from "@pages/Userpage";
+import CommingSoon from "@pages/CommingSoon";
 
 type RouteInfo = {
   path: string;
@@ -22,13 +22,16 @@ export const publicRoutes: RouteInfo[] = [
     title: "Authentication",
   },
   {
+    path: RouteConfig.Authentication,
+    component: Authentication,
+    title: "Authentication",
+  },
+  {
     path: RouteConfig.CommingSoon,
     component: CommingSoon,
     title: "Comming Soon",
   },
 ];
-
-
 
 export const privateRoutes: RouteInfo[] = [
   {

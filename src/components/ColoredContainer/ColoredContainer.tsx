@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { ColorPalette, Spacing, zIndex } from "../../config/style";
-import { ReactComponent as Frame } from "../../images/frame.svg";
+import { ColorPalette, Spacing, zIndex } from "@config/style";
+
+import { ReactComponent as Frame } from "@images/frame.svg";
 
 export enum ColoredContainerColor {
   primary = "primary",

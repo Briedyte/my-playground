@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as HomeIcon } from "../../images/house.svg";
-import { ReactComponent as HeaderBackground } from "../../images/header.svg";
-import Container from "../Container";
-import {
-  ColorPalette,
-  headerHeight,
-  Spacing,
-  zIndex,
-} from "../../config/style";
+import { ColorPalette, headerHeight, Spacing, zIndex } from "@config/style";
+
 import { Link, useLocation } from "react-router-dom";
-import Button from "../Button";
-import { ButtonVariant } from "../Button/Button";
-import Tooltip from "../Tooltip";
+
+import { ReactComponent as HomeIcon } from "@images/house.svg";
+import { ReactComponent as HeaderBackground } from "@images/header.svg";
+
+import Container from "@components/Container";
+
+import Button from "@components/Button";
+import { ButtonVariant } from "@components/Button/Button";
+import Tooltip from "@components/Tooltip";
 
 const HeaderWrapper = styled.header`
   position: relative;

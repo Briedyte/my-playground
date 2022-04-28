@@ -6,11 +6,11 @@ import {
   MediaQuery,
   Spacing,
   zIndex,
-} from "../../../config/style";
+} from "../../config/style";
 
-import Container from "../../../components/Container";
-import Slide from "../../../images/slide.png";
-import BalloonGame from "../../../components/BalloonGame";
+import Container from "../../components/Container";
+import Slide from "../../images/slide.png";
+import BalloonGame from "../../components/BalloonGame";
 
 const HomepageContainer = styled.div`
   text-align: center;

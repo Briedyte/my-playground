@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ColorPalette, Spacing } from "../../config/style";
+import { ColorPalette, Spacing } from "@config/style";
 
 const Container = styled.div`
   border: 2px solid ${ColorPalette.black};
