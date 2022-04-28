@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { RouteConfig } from "../../config/routes";
 import {
   Breakpoint,
   ColorPalette,
@@ -133,15 +134,15 @@ const Sidenav = () => {
   const links = [
     {
       name: "Authentication",
-      path: "/authentication",
+      path: RouteConfig.Authentication,
     },
     {
       name: "Comming soon...",
-      path: "/comming-soon",
+      path: RouteConfig.CommingSoon,
     },
     {
       name: "Comming soon...",
-      path: "/comming-soon",
+      path: RouteConfig.CommingSoon,
     },
   ];
 

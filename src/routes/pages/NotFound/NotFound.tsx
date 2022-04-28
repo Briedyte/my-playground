@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { FontSize } from "../config/style";
+
+import { FontSize } from "../../../config/style";
 
 const Maincontainer = styled.div`
   display: grid;

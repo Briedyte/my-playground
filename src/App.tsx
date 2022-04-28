@@ -5,18 +5,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Sidenav from "./components/Sidenav";
 
-import Homepage from "./pages/Homepage";
-import Authentication from "./pages/Authentication";
-import NotFound from "./pages/NotFound";
-import CommingSoon from "./pages/CommingSoon";
-
 import { MediaQuery, Spacing, sidenavWidth } from "./config/style";
 import GlobalStyle from "./GlobalStyle";
 
 import { headerHeight } from "./config/style";
 import { AuthProvider } from "./context/AuthProvider";
-import Userpage from "./pages/Userpage";
+
 import RequireAuth from "./hoc/RequireAuth";
+import RoutesRenderer from "./components/RoutesRenderer/RoutesRenderer";
 
 const NavAndMain = styled.div`
   min-height: calc(100% - ${headerHeight});
@@ -44,15 +40,7 @@ function App() {
         <NavAndMain>
           <Sidenav />
           <Main>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/authentication" element={<Authentication />} />
-              <Route path="/comming-soon" element={<CommingSoon />} />
-              <Route element={<RequireAuth />}>
-                <Route path="/user-page" element={<Userpage />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <RoutesRenderer />
           </Main>
         </NavAndMain>
         <GlobalStyle />
