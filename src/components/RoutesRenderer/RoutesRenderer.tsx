@@ -20,19 +20,19 @@ const RoutesRenderer = () => {
           }
         />
       ))}
-      <Route element={<RequireAuth />}>
-        {privateRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={
-              <DocumentMeta title={route.title}>
-                <route.component />
-              </DocumentMeta>
-            }
-          />
-        ))}
-      </Route>
+      {/* <Route element={<RequireAuth />}> */}
+      {privateRoutes.map((route) => (
+        <Route
+          key={route.path}
+          path={route.path}
+          element={
+            <DocumentMeta title={route.title}>
+              <route.component />
+            </DocumentMeta>
+          }
+        />
+      ))}
+      {/* </Route> */}
       <Route
         path="*"
         element={
