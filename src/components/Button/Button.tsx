@@ -10,8 +10,8 @@ import {
 
 export enum ButtonVariant {
   default = "default",
-  transparentDark = "transparentDark",
   transparent = "transparent",
+  plain = "plain",
 }
 
 const ButtonWrapper = styled.div`
@@ -87,6 +87,14 @@ const ButtonStyled = styled.button`
       :hover {
         border-style: dashed;
       }
+    `}
+
+    ${variant === ButtonVariant.plain &&
+    css`
+      backround: none;
+      color: ${ColorPalette.lightText};
+      width: 100%;
+      height: 100%;
     `}
   `}
 `;
