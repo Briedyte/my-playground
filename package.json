@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Briedyte.github.io/my-playground",
   "name": "my-playground",
   "version": "0.1.0",
   "private": true,
@@ -29,7 +28,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start:backend": "nodemon index.js",
+    "serve": "nodemon index.js",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -55,7 +54,6 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.24",
-    "craco-alias": "^3.0.1",
-    "gh-pages": "^3.2.3"
+    "craco-alias": "^3.0.1"
   }
 }
