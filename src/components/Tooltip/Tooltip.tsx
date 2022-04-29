@@ -1,8 +1,8 @@
 import React, { RefObject } from "react";
 import styled from "styled-components";
-import { ColorPalette, MediaQuery, Spacing, zIndex } from "@config/style";
+import { ColorPalette, MediaQuery, Spacing } from "@config/style";
 
-import { ReactComponent as TooltipImg } from "@images/tooltip.svg";
+const ArrowHeight = 40;
 
 const MainContainer = styled.div`
   position: relative;
@@ -10,7 +10,11 @@ const MainContainer = styled.div`
 
 const TooltipWrapper = styled.div`
   position: absolute;
-  right: -30px;
+  background: ${ColorPalette.tertiary};
+  border-radius: 30px;
+  border: 3px solid ${ColorPalette.black};
+  right: 0;
+  margin-top: ${ArrowHeight + 6}px;
   display: ${({ showTooltip }: { showTooltip: boolean }) =>
     showTooltip ? "block" : "none"};
 
@@ -19,25 +23,21 @@ const TooltipWrapper = styled.div`
   }
 `;
 
-const TooltipStyled = styled(TooltipImg)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: ${zIndex.negative};
-
-  .st9 {
-    fill: ${ColorPalette.tertiary};
-  }
-`;
-
 const ContentWrapper = styled.div`
-  z-index: ${zIndex.positive};
-  padding: ${Spacing[40]} ${Spacing[60]} ${Spacing[20]};
+  padding: ${Spacing[20]};
+  position: relative;
 
-  ${MediaQuery.s} {
-    padding: ${Spacing[40]} ${Spacing[28]} ${Spacing[20]};
+  :after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -${ArrowHeight + 5}px;
+    right: 30px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: ${ArrowHeight}px solid ${ColorPalette.tertiary};
+    
   }
 `;
 
@@ -58,7 +58,6 @@ const Tooltip = ({
     <MainContainer ref={reference}>
       {children}
       <TooltipWrapper showTooltip={showTooltip}>
-        <TooltipStyled />
         <ContentWrapper>{content}</ContentWrapper>
       </TooltipWrapper>
     </MainContainer>

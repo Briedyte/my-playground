@@ -1,17 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { ColorPalette, headerHeight, Spacing, zIndex } from "@config/style";
+import {
+  ColorPalette,
+  headerHeight,
+  MediaQuery,
+  Spacing,
+  zIndex,
+} from "@config/style";
 
 import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as HomeIcon } from "@images/house.svg";
 import { ReactComponent as HeaderBackground } from "@images/header.svg";
+import PhonePng from "@images/icons/phone.png";
+import MailPng from "@images/icons/email.png";
+import UserIcon from "@images/icons/user.png";
 
 import Container from "@components/Container";
-
 import Button from "@components/Button";
 import { ButtonVariant } from "@components/Button/Button";
 import Tooltip from "@components/Tooltip";
+import { ContainerVariant } from "@components/Container/Container";
+import { useAuth } from "@context/AuthProvider";
+import { RouteConfig } from "@config/routes";
 
 const HeaderWrapper = styled.header`
   position: relative;
@@ -57,15 +68,49 @@ const HomeImg = styled(HomeIcon)`
   }
 `;
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: ${Spacing[20]};
+  align-content: center;
+
+  ${MediaQuery.s} {
+    gap: ${Spacing[6]};
+  }
+`;
+
 const Contacts = styled.p`
   white-space: nowrap;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: ${Spacing[8]};
+`;
+
+const ContactsIcon = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+const UserLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`;
+
+const UserImg = styled.img`
+  width: 38px;
+  transition: width 0.3s linear;
+
+  :hover {
+    width: 44px;
+  }
 `;
 
 const Header = () => {
   const [tooltipShown, setTooltipShown] = useState(false);
   const location = useLocation();
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     const checkIfClickedOutside = (e: Event) => {
@@ -88,28 +133,50 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Background />
-      <Container>
+      <Container variant={ContainerVariant.sidePaddings}>
         <ContentWrapper>
           <Link to="/">
             <HomeImg isHome={location.pathname === "/"} />
           </Link>
-          <Tooltip
-            showTooltip={tooltipShown}
-            content={
-              <>
-                <Contacts>Tel: +370 621 75412</Contacts>
-                <Contacts>Email: em.briedyte@gmail.com</Contacts>
-              </>
-            }
-            reference={tooltipRef}
-          >
-            <Button
-              variant={ButtonVariant.transparent}
-              onClick={() => setTooltipShown((prev) => !prev)}
-            >
-              Contacts
+          <ButtonsWrapper>
+            <Button variant={ButtonVariant.transparent}>
+              <a
+                href="https://github.com/Briedyte/my-playground"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Github
+              </a>
             </Button>
-          </Tooltip>
+            <Tooltip
+              showTooltip={tooltipShown}
+              content={
+                <>
+                  <Contacts>
+                    <ContactsIcon src={PhonePng} alt="Phone" />
+                    +370 621 75412
+                  </Contacts>
+                  <Contacts>
+                    <ContactsIcon src={MailPng} alt="Mail" />
+                    em.briedyte@gmail.com
+                  </Contacts>
+                </>
+              }
+              reference={tooltipRef}
+            >
+              <Button
+                variant={ButtonVariant.transparent}
+                onClick={() => setTooltipShown((prev) => !prev)}
+              >
+                Contacts
+              </Button>
+            </Tooltip>
+            {isLoggedIn && (
+              <UserLink to={RouteConfig.UserPage}>
+                <UserImg src={UserIcon} alt="User" />
+              </UserLink>
+            )}
+          </ButtonsWrapper>
         </ContentWrapper>
       </Container>
     </HeaderWrapper>
