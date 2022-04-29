@@ -116,7 +116,7 @@ export const MediaQuery = {
   xl: `@media(min-width: ${Breakpoint.l}px)`,
 };
 
-export const headerHeight = "120px";
+export const headerHeight = "140px";
 export const sidenavWidth = "300px";
 
 export const formBaseStyle = `

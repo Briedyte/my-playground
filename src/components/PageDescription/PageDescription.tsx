@@ -10,6 +10,16 @@ import { ColoredContainerColor } from "@components/ColoredContainer/ColoredConta
 
 import { ReactComponent as DashedArrow } from "@images/dashedArrow.svg";
 
+const Title = styled.h2`
+  font-size: ${FontSize[40]};
+  color: ${ColorPalette.primary};
+`;
+
+const MainDescription = styled.p`
+  margin: ${Spacing[40]} auto  ${Spacing[8]}} ;
+  max-width: 900px;
+`;
+
 const ContainerAndArrow = styled.div`
   display: flex;
   max-width: 500px;
@@ -35,16 +45,21 @@ const Arrow = styled(DashedArrow)`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: end;
-  margin-right: ${Spacing[60]};
+  justify-content: center;
+  margin-bottom: ${Spacing[100]};
 `;
 
 interface PageDescriptionProps {
+  title: string;
   mainDescription: string;
   steps: string[];
 }
 
-const PageDescription = ({ mainDescription, steps }: PageDescriptionProps) => {
+const PageDescription = ({
+  title,
+  mainDescription,
+  steps,
+}: PageDescriptionProps) => {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
 
   const getColor = (index: number) => {
@@ -59,8 +74,10 @@ const PageDescription = ({ mainDescription, steps }: PageDescriptionProps) => {
   };
 
   return (
-    <section>
-      <p>{mainDescription}</p>
+    <>
+      <Title>{title}</Title>
+      <MainDescription>{mainDescription}</MainDescription>
+
       {descriptionExpanded &&
         steps.map((step, index) => {
           const isOdd = index % 2 !== 0;
@@ -83,13 +100,13 @@ const PageDescription = ({ mainDescription, steps }: PageDescriptionProps) => {
         })}
       <ButtonWrapper>
         <Button
-          variant={ButtonVariant.transparentDark}
+          variant={ButtonVariant.transparent}
           onClick={() => setDescriptionExpanded((prev) => !prev)}
         >
           {descriptionExpanded ? "Tell me less!" : "Tell me more..."}
         </Button>
       </ButtonWrapper>
-    </section>
+    </>
   );
 };
 

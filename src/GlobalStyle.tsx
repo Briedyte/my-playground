@@ -31,7 +31,7 @@ body {
     background: ${ColorPalette.backgroundSolidLighter};
 }
 
-p, label, input, span, li {
+p, label, input, span, li, a, button {
     color: ${ColorPalette.black};
     font-family: ${FontFamily.nunito};
     font-weight: ${FontWeight.regular};
@@ -46,6 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 a {
     text-decoration: none;
+    font-size: 18px;
 }
 
 ul {

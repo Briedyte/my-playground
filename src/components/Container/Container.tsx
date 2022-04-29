@@ -13,22 +13,38 @@ const ContainerWrapper = styled.div`
 
   ${({ variant }: { variant: ContainerVariant }) =>
     css`
+      ${variant === ContainerVariant.sidePaddings &&
+      css`
+        padding: 0 ${Spacing[100]};
+
+        ${MediaQuery.m} {
+          padding: 0 ${Spacing[24]};
+        }
+      `}
+
       ${variant === ContainerVariant.centeredContent &&
       css`
+        padding: 0 ${Spacing[100]};
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
+
+        ${MediaQuery.m} {
+          padding: 0 ${Spacing[24]};
+        }
       `}
+
       ${variant === ContainerVariant.allPaddings &&
       css`
         padding: ${Spacing[60]} ${Spacing[100]};
+
+        ${MediaQuery.m} {
+          padding: ${Spacing[60]} ${Spacing[24]};
+        }
       `}
     `}
-
-  ${MediaQuery.m} {
-    padding: 0 ${Spacing[24]};
-  }
 `;
 
 interface ContainerProps {

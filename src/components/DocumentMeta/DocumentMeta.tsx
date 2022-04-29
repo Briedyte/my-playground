@@ -9,12 +9,12 @@ const DocumentMeta = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div>
+    <>
       <Helmet>
         <title>{title}</title>
       </Helmet>
       {children}
-    </div>
+    </>
   );
 };
 
