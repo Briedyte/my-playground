@@ -59,8 +59,8 @@ const Arrow = styled(ArrowIcon)`
   margin-left: auto;
   margin-right: ${Spacing[6]};
   transition: 0.4s transform ease-in;
-  transform: ${({ isMenuOpen }: { isMenuOpen: boolean }) =>
-    isMenuOpen && "rotate(-180deg)"};
+  transform: ${({ $isMenuOpen }: { $isMenuOpen: boolean }) =>
+    $isMenuOpen && "rotate(-180deg)"};
 `;
 
 const LinkStyled = styled(Link)`
@@ -155,7 +155,7 @@ const Sidenav = () => {
     <MainContainer $isMenuOpen={menuOpen}>
       {isMobile ? (
         <Arrow
-          isMenuOpen={menuOpen}
+          $isMenuOpen={menuOpen}
           onClick={() => setMenuOpen((prev) => !prev)}
         />
       ) : (

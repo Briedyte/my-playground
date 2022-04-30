@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   ColorPalette,
-  FontSize,
   MediaQuery,
   Spacing,
 } from "../../config/style";
@@ -16,11 +15,6 @@ import { useAuth } from "@context/AuthProvider";
 import Button from "@components/Button";
 import { ContainerVariant } from "@components/Container/Container";
 import { authenticationDescr } from "@config/descriptions/authentication";
-
-const DescriptionWrapper = styled.div`
-  margin: 0 auto;
-  max-width: 900px;
-`;
 
 const AuthenticationContainer = styled.section`
   display: flex;

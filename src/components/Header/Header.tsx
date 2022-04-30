@@ -57,8 +57,8 @@ const HomeImg = styled(HomeIcon)`
   background: ${ColorPalette.backgroundTransparent};
 
   rect {
-    fill: ${({ isHome }: { isHome: boolean }) =>
-      isHome ? ColorPalette.tertiary : ColorPalette.backgroundTransparent};
+    fill: ${({ $isHome }: { $isHome: boolean }) =>
+      $isHome ? ColorPalette.tertiary : ColorPalette.backgroundTransparent};
   }
 
   :hover {
@@ -136,7 +136,7 @@ const Header = () => {
       <Container variant={ContainerVariant.sidePaddings}>
         <ContentWrapper>
           <Link to="/">
-            <HomeImg isHome={location.pathname === "/"} />
+            <HomeImg $isHome={location.pathname === "/"} />
           </Link>
           <ButtonsWrapper>
             <Button variant={ButtonVariant.transparent}>

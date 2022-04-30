@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ColorPalette, FontSize, Spacing } from "@config/style";
+import { ColorPalette, FontSize, MediaQuery, Spacing } from "@config/style";
 
 import Container from "@components/Container";
 import { ContainerVariant } from "@components/Container/Container";
@@ -18,6 +18,11 @@ const Image = styled.img`
   border-radius: 20px;
   max-height: 60%;
   max-width: 50%;
+
+  ${MediaQuery.m} {
+    max-height: 80%;
+    max-width: 100%;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -61,7 +66,7 @@ const Userpage = () => {
     };
 
     fetchFox();
-  }, []);
+  }, [randomFoxId]);
 
   return (
     <Container variant={ContainerVariant.centeredContent}>

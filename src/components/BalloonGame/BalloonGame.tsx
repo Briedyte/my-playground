@@ -84,10 +84,10 @@ const IdleBalloonImg = styled.img`
 const ActiveGameContainer = styled.section`
   @keyframes backgroundAppear {
     0% {
-      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+      opacity: 0;
     }
     100% {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      opacity: 1;
     }
   }
   background: ${ColorPalette.balloonGameBackground};
