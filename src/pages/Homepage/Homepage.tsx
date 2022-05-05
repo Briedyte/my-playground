@@ -71,7 +71,7 @@ const Homepage = () => {
           <div>
             <MainTitle>Welcome to my playground!</MainTitle>
             <p>
-              I created this app to work on my front end skills. The project is
+              I created this app to work on my React skills. The project is
               still fresh so more stuff comming soon.
             </p>
             <br />
